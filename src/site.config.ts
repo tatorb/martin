@@ -22,16 +22,18 @@ export const VSL_EMBED_URL = '';
 export const VSL_POSTER_URL = '';
 
 /**
- * URL de embed del calendario.
+ * URL de embed del calendario. Hoy, la página de citas de Google Calendar.
  *
+ *   Google Calendar  ->  https://calendar.google.com/calendar/appointments/schedules/ID?gv=true
  *   HubSpot Meetings ->  https://meetings.hubspot.com/USUARIO?embed=true
  *   Calendly         ->  https://calendly.com/USUARIO/reunion
  *   Cal.com          ->  https://cal.com/USUARIO/reunion
  */
-export const CALENDAR_EMBED_URL = '';
+export const CALENDAR_EMBED_URL =
+  'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3Sa-itWHrP7z9wAibQag7-J1pJbUFqcUEKdO01XhpVzICg465f75ScKFBmBc51npBnLJZ3iFoE?gv=true';
 
 /** Alto del iframe del calendario en píxeles. Subilo si el widget queda cortado. */
-export const CALENDAR_HEIGHT = 720;
+export const CALENDAR_HEIGHT = 600;
 
 /** Foto del fundador. Ruta relativa a /public, por ejemplo '/martin.jpg'. */
 export const FOUNDER_PHOTO_URL = '';
