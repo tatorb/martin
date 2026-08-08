@@ -4,14 +4,20 @@
 //
 // La forma se parte en cinco piezas para que solo estiren los tramos rectos.
 // Las tapas son SVG de ancho fijo, así las curvas nunca se deforman.
-export const STRIP_H = 40; // alto de la tira fina
-export const BLOCK_H = 72; // alto de la parte ancha
+export const STRIP_H = 20; // alto de la tira fina
+export const BLOCK_H = 48; // alto de la parte ancha
 export const CAP_W = 36; // ancho de cada transición
 export const CENTER_W = 1040; // ancho total de la parte ancha, curvas incluidas
 export const FLAT_W = CENTER_W - CAP_W * 2;
 
-// Tangentes horizontales en los dos extremos, de ahí la curva en S continua.
-const capPath = `M 0,0 L ${CAP_W},0 L ${CAP_W},${BLOCK_H} C ${CAP_W / 2},${BLOCK_H} ${CAP_W / 2},${STRIP_H} 0,${STRIP_H} Z`;
+// Cuánto se alejan los puntos de control de sus extremos, como fracción del ancho
+// de la tapa. Por encima de 0.5 los puntos se cruzan y la S se marca más.
+const CURVE = 0.9;
+const k = CAP_W * CURVE;
+
+// Los puntos de control comparten la y con sus extremos, así las tangentes quedan
+// horizontales y la unión con los tramos rectos es continua.
+const capPath = `M 0,0 L ${CAP_W},0 L ${CAP_W},${BLOCK_H} C ${CAP_W - k},${BLOCK_H} ${k},${STRIP_H} 0,${STRIP_H} Z`;
 ---
 
 <div
