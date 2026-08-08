@@ -13,6 +13,11 @@
   --color-mist: #f4f5f6;
   --color-muted: #55606a;
 
+  /* Gris de base del hero. Tiene que ser lo bastante oscuro para que la silueta
+     blanca del header se recorte, y lo bastante claro para que --color-muted
+     mantenga contraste AA encima. */
+  --color-shell: #e5e7e9;
+
   --font-sans: 'Urbanist Variable', ui-sans-serif, system-ui, sans-serif;
 
   --spacing-section: 7rem;
@@ -22,7 +27,7 @@
   html {
     scroll-behavior: smooth;
     /* Deja aire bajo el header fijo cuando un CTA ancla a #agenda. */
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 72px;
     -webkit-text-size-adjust: 100%;
   }
 

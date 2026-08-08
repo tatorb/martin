@@ -1,0 +1,47 @@
+---
+// Silueta del header, como en studiomrb.com. Una tira fina de lateral a lateral
+// que en el centro se ensancha, con curvas invertidas en las dos transiciones.
+//
+// La forma se parte en cinco piezas para que solo estiren los tramos rectos.
+// Las tapas son SVG de ancho fijo, así las curvas nunca se deforman.
+export const STRIP_H = 40; // alto de la tira fina
+export const BLOCK_H = 72; // alto de la parte ancha
+export const CAP_W = 36; // ancho de cada transición
+export const CENTER_W = 1040; // ancho total de la parte ancha, curvas incluidas
+export const FLAT_W = CENTER_W - CAP_W * 2;
+
+// Tangentes horizontales en los dos extremos, de ahí la curva en S continua.
+const capPath = `M 0,0 L ${CAP_W},0 L ${CAP_W},${BLOCK_H} C ${CAP_W / 2},${BLOCK_H} ${CAP_W / 2},${STRIP_H} 0,${STRIP_H} Z`;
+---
+
+<div
+  aria-hidden="true"
+  class="pointer-events-none absolute inset-x-0 top-0 flex justify-center text-paper"
+  style={`height:${BLOCK_H}px`}
+>
+  <div class="flex-1 bg-current" style={`height:${STRIP_H}px`}></div>
+
+  <svg
+    width={CAP_W}
+    height={BLOCK_H}
+    viewBox={`0 0 ${CAP_W} ${BLOCK_H}`}
+    fill="currentColor"
+    class="shrink-0"
+  >
+    <path d={capPath}></path>
+  </svg>
+
+  <div class="bg-current" style={`height:${BLOCK_H}px;width:min(${FLAT_W}px,100%)`}></div>
+
+  <svg
+    width={CAP_W}
+    height={BLOCK_H}
+    viewBox={`0 0 ${CAP_W} ${BLOCK_H}`}
+    fill="currentColor"
+    class="shrink-0 -scale-x-100"
+  >
+    <path d={capPath}></path>
+  </svg>
+
+  <div class="flex-1 bg-current" style={`height:${STRIP_H}px`}></div>
+</div>
