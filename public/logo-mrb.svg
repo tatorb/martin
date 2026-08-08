@@ -1,13 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 40" width="210" height="40" role="img" aria-label="Studio MRB">
-  <g fill="currentColor">
-    <rect x="0" y="8" width="4" height="24"/>
-    <rect x="9" y="8" width="4" height="24"/>
-    <rect x="18" y="8" width="4" height="24"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 770 560" role="img" aria-label="Studio MRB">
+  <text x="4" y="130" fill="currentColor"
+        font-family="Urbanist Variable, Urbanist, ui-sans-serif, system-ui, sans-serif"
+        font-size="150" font-weight="300" letter-spacing="4">studio</text>
+  <g transform="translate(0,192)">
+    <path fill="currentColor" fill-rule="evenodd" d="M 0,368 L 0,154 A 76 76 0 0 1 76,78 L 130,78 A 76 76 0 0 1 206,154 L 206,368 L 130,368 L 130,172 A 18 18 0 0 0 112,154 L 94,154 A 18 18 0 0 0 76,172 L 76,368 Z"/>
+    <path fill="currentColor" fill-rule="evenodd" d="M 130,368 L 130,154 A 76 76 0 0 1 206,78 L 260,78 A 76 76 0 0 1 336,154 L 336,368 L 260,368 L 260,172 A 18 18 0 0 0 242,154 L 224,154 A 18 18 0 0 0 206,172 L 206,368 Z"/>
+    <path fill="currentColor" fill-rule="evenodd" d="M 370,368 L 370,154 A 76 76 0 0 1 446,78 L 530,78 L 530,154 L 464,154 A 18 18 0 0 0 446,172 L 446,368 Z"/>
+    <path fill="currentColor" fill-rule="evenodd" d="M 564,0 L 640,0 L 640,78 L 694,78 A 76 76 0 0 1 770,154 L 770,292 A 76 76 0 0 1 694,368 L 564,368 Z M 640,172 A 18 18 0 0 1 658,154 L 676,154 A 18 18 0 0 1 694,172 L 694,274 A 18 18 0 0 1 676,292 L 658,292 A 18 18 0 0 1 640,274 Z"/>
   </g>
-  <text x="34" y="19" fill="currentColor"
-        font-family="Urbanist Variable, Urbanist, ui-sans-serif, system-ui, sans-serif"
-        font-size="11" font-weight="400" letter-spacing="4.2">STUDIO</text>
-  <text x="34" y="34" fill="currentColor"
-        font-family="Urbanist Variable, Urbanist, ui-sans-serif, system-ui, sans-serif"
-        font-size="16" font-weight="700" letter-spacing="2.4">MRB</text>
 </svg>

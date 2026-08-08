@@ -1,6 +1,6 @@
 ---
-// Lockup tipográfico de Studio MRB, en markup y no en imagen, para que use Urbanist
-// y herede el color del contexto (negro sobre claro, blanco sobre el bloque oscuro).
+// Lockup de Studio MRB. La palabra "studio" va en markup para que use Urbanist,
+// el signo "mrb" va en trazados. Todo hereda el color del contexto con currentColor.
 interface Props {
   class?: string;
 }
@@ -8,15 +8,30 @@ interface Props {
 const { class: extra = '' } = Astro.props;
 ---
 
-<span class:list={['inline-flex items-center gap-2.5 leading-none', extra]}>
-  <span aria-hidden="true" class="flex items-stretch gap-[3px] self-stretch">
-    <span class="w-[3px] bg-current"></span>
-    <span class="w-[3px] bg-current"></span>
-    <span class="w-[3px] bg-current"></span>
-  </span>
-  <span class="flex flex-col gap-[3px]">
-    <span class="text-[0.6rem] font-normal uppercase tracking-[0.42em]">Studio</span>
-    <span class="text-[0.95rem] font-bold uppercase tracking-[0.2em]">MRB</span>
-  </span>
+<span class:list={['inline-flex flex-col leading-none', extra]}>
+  <span class="pl-[2px] text-[0.62em] font-light lowercase tracking-[0.04em]">studio</span>
+  <svg
+    viewBox="0 0 770 368"
+    class="mt-[0.16em] h-[1em] w-auto"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M 0,368 L 0,154 A 76 76 0 0 1 76,78 L 130,78 A 76 76 0 0 1 206,154 L 206,368 L 130,368 L 130,172 A 18 18 0 0 0 112,154 L 94,154 A 18 18 0 0 0 76,172 L 76,368 Z"
+    ></path>
+    <path
+      fill-rule="evenodd"
+      d="M 130,368 L 130,154 A 76 76 0 0 1 206,78 L 260,78 A 76 76 0 0 1 336,154 L 336,368 L 260,368 L 260,172 A 18 18 0 0 0 242,154 L 224,154 A 18 18 0 0 0 206,172 L 206,368 Z"
+    ></path>
+    <path
+      fill-rule="evenodd"
+      d="M 370,368 L 370,154 A 76 76 0 0 1 446,78 L 530,78 L 530,154 L 464,154 A 18 18 0 0 0 446,172 L 446,368 Z"
+    ></path>
+    <path
+      fill-rule="evenodd"
+      d="M 564,0 L 640,0 L 640,78 L 694,78 A 76 76 0 0 1 770,154 L 770,292 A 76 76 0 0 1 694,368 L 564,368 Z M 640,172 A 18 18 0 0 1 658,154 L 676,154 A 18 18 0 0 1 694,172 L 694,274 A 18 18 0 0 1 676,292 L 658,292 A 18 18 0 0 1 640,274 Z"
+    ></path>
+  </svg>
   <span class="sr-only">Studio MRB</span>
 </span>
