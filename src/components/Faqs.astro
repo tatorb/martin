@@ -1,0 +1,67 @@
+---
+// Respuestas apoyadas en los plazos y el alcance de la propuesta de trabajo,
+// y en el modelo de estados del protocolo de trabajo de MRB.
+const faqs = [
+  {
+    p: '¿En cuánto tiempo veo el primer resultado?',
+    r: 'El sistema empieza a enviar el día 20, contando desde la reunión de definición. Las primeras respuestas suelen aparecer en las semanas siguientes, porque la mayoría de las reuniones se agenda entre el quinto y el octavo seguimiento. Dicho de otra forma, el trabajo de este mes son las agendas del mes que viene.',
+  },
+  {
+    p: '¿Qué pasa si no funciona?',
+    r: 'Arrancamos con un piloto sobre un mercado acotado. El objetivo de esa fase no es demostrar volumen, es demostrar criterio y prolijidad. Al cierre, y en función de lo que muestren los números, definimos juntos el alcance y los términos del programa completo. Si los números no dan, esa también es una conclusión válida y te la vamos a decir.',
+  },
+  {
+    p: '¿Cuánto tiempo le demanda a mi equipo?',
+    r: 'Poco, pero no cero. Necesitamos una persona que responda rápido a los prospectos interesados, la presencia del decisor en la reunión semanal de alineación, y la aprobación de accesos y dominios durante el setup. La operación diaria corre por nuestra cuenta.',
+  },
+  {
+    p: '¿Qué entregan exactamente?',
+    r: 'Conversaciones calificadas con decisores de las cuentas que definimos juntos, y el sistema que las produce, secuencias, mensajes, herramientas configuradas e integración con tu CRM. Todo queda documentado y visible en un tablero que podés mirar cuando quieras.',
+  },
+  {
+    p: '¿En qué se diferencia de contratar un SDR?',
+    r: 'Un SDR es una persona, y su conocimiento se va con ella. Acá entra un equipo, ejecutivo de prospección, especialista en implementación y consultor, más el criterio de un sistema que ya se probó en otras cuentas. Además queda escrito, así que si mañana lo querés operar internamente, podés.',
+  },
+  {
+    p: '¿Con qué mercados trabajan?',
+    r: 'Operamos campañas en Argentina, México, Paraguay y Colombia, en industrias B2B con ciclos de venta largos y decisores identificables. Si tu mercado no está en esa lista, contanoslo en la reunión y te decimos con honestidad si podemos.',
+  },
+  {
+    p: '¿Usan mi dominio para enviar?',
+    r: 'No. Cada cliente trabaja con infraestructura de envío propia y aislada, para que la reputación de tu dominio principal no dependa de una campaña de prospección.',
+  },
+  {
+    p: '¿Cómo miden si va bien?',
+    r: 'Con tus propios números, no con promedios de industria. Seguimos el recorrido de cada prospecto etapa por etapa, desde el primer contacto hasta la reunión sostenida, que es el resultado que nos importa. Cuando algo cae, sabemos exactamente en qué paso cayó y volvemos ahí.',
+  },
+];
+---
+
+<section id="faqs" class="border-b border-line/70">
+  <div class="mx-auto max-w-4xl px-6 py-20 md:py-28">
+    <p class="eyebrow">Preguntas frecuentes</p>
+    <h2 class="mt-5 text-3xl font-bold uppercase leading-tight tracking-tight md:text-4xl">
+      Lo que suelen preguntarnos antes de empezar
+    </h2>
+
+    <div class="mt-12 border-t border-line">
+      {
+        faqs.map((f) => (
+          <details class="group border-b border-line">
+            <summary class="flex cursor-pointer items-start justify-between gap-6 py-6 text-left text-lg font-semibold leading-snug transition-colors hover:text-accent">
+              <span>{f.p}</span>
+              <span
+                aria-hidden="true"
+                class="relative mt-2 h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-45"
+              >
+                <span class="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 bg-ink" />
+                <span class="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-ink" />
+              </span>
+            </summary>
+            <p class="pb-7 pr-10 text-base leading-relaxed text-muted">{f.r}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

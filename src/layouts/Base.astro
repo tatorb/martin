@@ -1,0 +1,45 @@
+---
+import '@fontsource-variable/urbanist';
+import '../styles/global.css';
+import { SEO } from '../site.config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SEO.title, description = SEO.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://studiomrb.com');
+---
+
+<!doctype html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/logo-mrb.svg" type="image/svg+xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_AR" />
+    <meta property="og:site_name" content="Studio MRB" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+  </head>
+
+  <body>
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-none focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-paper"
+    >
+      Ir al contenido
+    </a>
+    <slot />
+  </body>
+</html>

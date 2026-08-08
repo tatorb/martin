@@ -1,0 +1,57 @@
+---
+import Cta from './Cta.astro';
+
+// Cifras estructurales del programa, tomadas de la propuesta de trabajo.
+const marcas = [
+  { valor: 'Día 20', detalle: 'el sistema ya está ejecutando' },
+  { valor: '2 meses', detalle: 'de piloto sobre un mercado acotado' },
+  { valor: '3 canales', detalle: 'mail, LinkedIn y llamadas' },
+];
+---
+
+<section id="contenido" class="relative overflow-hidden border-b border-line/70">
+  <!-- Retícula de fondo, muy tenue, para dar textura sin sumar color. -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 opacity-[0.35]"
+    style="background-image:linear-gradient(to right,#cfcfcf 1px,transparent 1px),linear-gradient(to bottom,#cfcfcf 1px,transparent 1px);background-size:88px 88px;mask-image:radial-gradient(ellipse 70% 60% at 50% 0%,#000 30%,transparent 100%)"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-6xl px-6 pb-24 pt-20 md:pb-32 md:pt-28">
+    <p class="eyebrow">Apertura de Cuentas</p>
+
+    <h1
+      class="mt-6 max-w-4xl text-4xl font-bold uppercase leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+    >
+      Reuniones con los decisores<br class="hidden sm:block" /> de las cuentas que te importan
+    </h1>
+
+    <p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
+      Tu equipo comercial cierra y cuida relaciones. Nosotros abrimos las conversaciones que
+      todavía no existen, con las empresas que elegiste y con la persona que decide, sin depender
+      de referidos ni de los clientes de siempre.
+    </p>
+
+    <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+      <Cta />
+      <span class="text-sm text-muted">Reunión de 30 minutos, sin costo</span>
+    </div>
+
+    <dl class="mt-16 grid max-w-3xl grid-cols-1 gap-px border border-line bg-line sm:grid-cols-3">
+      {
+        marcas.map((m) => (
+          <div class="bg-paper px-6 py-7">
+            <dt class="text-2xl font-bold uppercase tracking-tight">{m.valor}</dt>
+            <dd class="mt-2 text-sm leading-relaxed text-muted">{m.detalle}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <p class="mt-10 max-w-2xl text-sm leading-relaxed text-muted">
+      Operamos sistemas de prospección para servicios IT, fintech, tecnologías inmersivas y
+      desarrollo inmobiliario, en Argentina, México, Paraguay y Colombia.
+    </p>
+  </div>
+</section>

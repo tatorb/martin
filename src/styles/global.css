@@ -1,0 +1,82 @@
+@import 'tailwindcss';
+
+/* Sistema visual de Studio MRB.
+   Paleta monocroma, tipografía Urbanist, mucho aire. */
+@theme {
+  --color-ink: #000000;
+  --color-accent: #5b7382;
+  --color-line: #cfcfcf;
+  --color-paper: #ffffff;
+
+  /* Grises derivados, para fondos y texto secundario.
+     --color-line queda reservado a bordes y fondos, nunca a texto. */
+  --color-mist: #f4f5f6;
+  --color-muted: #55606a;
+
+  --font-sans: 'Urbanist Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --spacing-section: 7rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Deja aire bajo el header fijo cuando un CTA ancla a #agenda. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    /* Ningún hijo debe poder desbordar el ancho del viewport. */
+    overflow-x: hidden;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* El marcador nativo del acordeón se reemplaza por un signo propio. */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  summary {
+    list-style: none;
+  }
+}
+
+@layer components {
+  /* Titular de sección, en mayúsculas y con tracking cerrado, como el resto
+     del sistema de marca. */
+  .eyebrow {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

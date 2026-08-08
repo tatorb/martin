@@ -1,0 +1,20 @@
+---
+import Cta from './Cta.astro';
+import Logo from './Logo.astro';
+---
+
+<header class="sticky top-0 z-40 border-b border-line/70 bg-paper/90 backdrop-blur">
+  <div class="mx-auto flex h-20 max-w-6xl items-center justify-between px-6">
+    <a href="#contenido" class="text-ink" aria-label="Studio MRB, inicio">
+      <Logo />
+    </a>
+
+    <nav class="hidden items-center gap-9 text-sm text-muted md:flex" aria-label="Secciones">
+      <a href="#casos" class="transition-colors hover:text-ink">Casos</a>
+      <a href="#sistema" class="transition-colors hover:text-ink">El sistema</a>
+      <a href="#faqs" class="transition-colors hover:text-ink">Preguntas</a>
+    </nav>
+
+    <Cta label="Agendar" class="!px-5 !py-3 !text-xs" />
+  </div>
+</header>

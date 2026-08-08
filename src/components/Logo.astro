@@ -1,0 +1,22 @@
+---
+// Lockup tipográfico de Studio MRB, en markup y no en imagen, para que use Urbanist
+// y herede el color del contexto (negro sobre claro, blanco sobre el bloque oscuro).
+interface Props {
+  class?: string;
+}
+
+const { class: extra = '' } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-2.5 leading-none', extra]}>
+  <span aria-hidden="true" class="flex items-stretch gap-[3px] self-stretch">
+    <span class="w-[3px] bg-current"></span>
+    <span class="w-[3px] bg-current"></span>
+    <span class="w-[3px] bg-current"></span>
+  </span>
+  <span class="flex flex-col gap-[3px]">
+    <span class="text-[0.6rem] font-normal uppercase tracking-[0.42em]">Studio</span>
+    <span class="text-[0.95rem] font-bold uppercase tracking-[0.2em]">MRB</span>
+  </span>
+  <span class="sr-only">Studio MRB</span>
+</span>

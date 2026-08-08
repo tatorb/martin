@@ -1,0 +1,24 @@
+---
+interface Props {
+  label?: string;
+  variant?: 'solid' | 'outline';
+  class?: string;
+}
+
+const { label = 'Agendar una reunión', variant = 'solid', class: extra = '' } = Astro.props;
+
+const base =
+  'inline-flex items-center justify-center gap-3 px-8 py-4 text-sm font-semibold uppercase tracking-[0.14em] transition-colors duration-200';
+
+const styles = {
+  solid: 'bg-ink text-paper hover:bg-accent',
+  outline: 'border border-ink text-ink hover:bg-ink hover:text-paper',
+};
+---
+
+<a href="#agenda" class:list={[base, styles[variant], extra]}>
+  {label}
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M1 8h13M9 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" />
+  </svg>
+</a>

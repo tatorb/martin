@@ -1,0 +1,55 @@
+---
+import { CONTACT } from '../site.config';
+import Logo from './Logo.astro';
+
+const anio = new Date().getFullYear();
+---
+
+<footer class="bg-paper">
+  <div class="mx-auto max-w-6xl px-6 py-14">
+    <div class="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+      <div>
+        <Logo />
+        <p class="mt-5 max-w-sm text-sm leading-relaxed text-muted">
+          Agencia boutique de estrategia comercial. Abrimos conversaciones con los decisores de tus
+          cuentas clave para que tu equipo se dedique a cerrar.
+        </p>
+      </div>
+
+      <div class="text-sm">
+        <p class="font-semibold uppercase tracking-[0.14em] text-accent">Contacto</p>
+        <ul class="mt-5 space-y-3 text-muted">
+          <li>{CONTACT.name}, {CONTACT.role}</li>
+          <li>
+            <a
+              href={`mailto:${CONTACT.email}`}
+              class="text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+            >
+              {CONTACT.email}
+            </a>
+          </li>
+          <li>
+            <a
+              href={`tel:${CONTACT.phoneHref}`}
+              class="text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+            >
+              {CONTACT.phone}
+            </a>
+          </li>
+          <li>
+            <a
+              href={CONTACT.site}
+              class="text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-accent"
+            >
+              studiomrb.com
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="mt-12 border-t border-line pt-7 text-xs text-muted">
+      {anio} Studio MRB. Todos los derechos reservados.
+    </p>
+  </div>
+</footer>
