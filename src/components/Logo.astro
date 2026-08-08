@@ -1,6 +1,14 @@
 ---
-// Lockup de Studio MRB. La palabra "studio" va en markup para que use Urbanist,
-// el signo "mrb" va en trazados. Todo hereda el color del contexto con currentColor.
+// Lockup horizontal de Studio MRB, como en studiomrb.com. "studio" en Urbanist
+// liviano y "mrb" en trazados, unidos en una sola línea.
+//
+// El contenedor usa items-baseline. La línea de base de un SVG dentro de un flex
+// es su borde inferior, que en este viewBox coincide con la base de la "mrb", así
+// que las dos partes apoyan sobre la misma línea sin ajustes a ojo.
+//
+// La altura del SVG sale de igualar las alturas de x. La x de la "mrb" ocupa 290
+// de las 368 unidades del viewBox y la de Urbanist ronda 0.52 del cuerpo, de ahí
+// que el SVG vaya a 0.66em respecto del texto.
 interface Props {
   class?: string;
 }
@@ -8,14 +16,9 @@ interface Props {
 const { class: extra = '' } = Astro.props;
 ---
 
-<span class:list={['inline-flex flex-col leading-none', extra]}>
-  <span class="pl-[2px] text-[0.62em] font-light lowercase tracking-[0.04em]">studio</span>
-  <svg
-    viewBox="0 0 770 368"
-    class="mt-[0.16em] h-[1em] w-auto"
-    fill="currentColor"
-    aria-hidden="true"
-  >
+<span class:list={['inline-flex items-baseline leading-none', extra]}>
+  <span class="font-light lowercase tracking-[0.005em]">studio</span>
+  <svg viewBox="0 0 770 368" class="h-[0.66em] w-auto" fill="currentColor" aria-hidden="true">
     <path
       fill-rule="evenodd"
       d="M 0,368 L 0,154 A 76 76 0 0 1 76,78 L 130,78 A 76 76 0 0 1 206,154 L 206,368 L 130,368 L 130,172 A 18 18 0 0 0 112,154 L 94,154 A 18 18 0 0 0 76,172 L 76,368 Z"

@@ -5,19 +5,28 @@
 // La forma se parte en cinco piezas para que solo estiren los tramos rectos.
 // Las tapas son SVG de ancho fijo, así las curvas nunca se deforman.
 export const STRIP_H = 20; // alto de la tira fina
-export const BLOCK_H = 48; // alto de la parte ancha
-export const CAP_W = 36; // ancho de cada transición
-export const CENTER_W = 1040; // ancho total de la parte ancha, curvas incluidas
+export const BLOCK_H = 64; // alto de la parte ancha
+export const RADIUS = 16; // radio de cada arco de la transición
+export const CAP_W = RADIUS * 2; // el ancho de la tapa lo fija el radio
+export const CENTER_W = 1240; // ancho total de la parte ancha, curvas incluidas
 export const FLAT_W = CENTER_W - CAP_W * 2;
 
-// Cuánto se alejan los puntos de control de sus extremos, como fracción del ancho
-// de la tapa. Por encima de 0.5 los puntos se cruzan y la S se marca más.
-const CURVE = 0.9;
-const k = CAP_W * CURVE;
-
-// Los puntos de control comparten la y con sus extremos, así las tangentes quedan
-// horizontales y la unión con los tramos rectos es continua.
-const capPath = `M 0,0 L ${CAP_W},0 L ${CAP_W},${BLOCK_H} C ${CAP_W - k},${BLOCK_H} ${k},${STRIP_H} 0,${STRIP_H} Z`;
+// La transición son dos arcos de círculo tangentes, no una Bézier. El primero
+// sale horizontal desde la parte ancha y llega vertical, el segundo arranca
+// vertical y sale horizontal sobre la tira fina. Así el empalme entre curva y
+// contracurva es exactamente vertical, no una aproximación.
+//
+// Como el radio es menor que la mitad del salto de altura, entre los dos arcos
+// queda además un tramo recto vertical, igual que en la referencia.
+const capPath = [
+  `M 0,0`,
+  `L ${CAP_W},0`,
+  `L ${CAP_W},${BLOCK_H}`,
+  `A ${RADIUS} ${RADIUS} 0 0 1 ${CAP_W - RADIUS},${BLOCK_H - RADIUS}`,
+  `L ${CAP_W - RADIUS},${STRIP_H + RADIUS}`,
+  `A ${RADIUS} ${RADIUS} 0 0 0 0,${STRIP_H}`,
+  `Z`,
+].join(' ');
 ---
 
 <div
