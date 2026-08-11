@@ -35,8 +35,9 @@ export const CALENDAR_EMBED_URL =
 /** Alto del iframe del calendario en píxeles. Subilo si el widget queda cortado. */
 export const CALENDAR_HEIGHT = 980;
 
-/** Foto del fundador. Ruta relativa a /public, por ejemplo '/martin.jpg'. */
-export const FOUNDER_PHOTO_URL = '';
+/** Foto del fundador. Ruta relativa a /public. El original sin comprimir queda
+ * en src/assets, fuera del build. */
+export const FOUNDER_PHOTO_URL = '/martin.webp';
 
 export const CONTACT = {
   name: 'Martín Rodriguez Brusco',
