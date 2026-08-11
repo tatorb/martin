@@ -27,12 +27,12 @@ const sizes = {
   md: 'px-8 py-3.5 text-base', // 52px de alto, para el cuerpo de la página
 };
 
-// El halo es el del sitio institucional, box-shadow 0 0 16px 6px rgba(0,0,0,0.51).
-const halo = 'shadow-[0_0_16px_6px_rgba(0,0,0,0.51)]';
+// Halo del sitio institucional, 0 0 13px -2px sobre #00000082.
+const halo = 'shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)]';
 
 const styles = {
   solid: `bg-ink text-paper hover:bg-accent ${halo}`,
-  outline: 'border border-ink text-ink hover:bg-ink hover:text-paper',
+  outline: `border border-ink text-ink hover:bg-ink hover:text-paper ${halo}`,
   light: `bg-paper text-ink hover:bg-line ${halo}`, // para fondos oscuros, como el hero
 };
 ---
