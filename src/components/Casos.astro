@@ -1,28 +1,11 @@
 ---
-// Portfolio real, tomado de la presentación institucional y de la propuesta de trabajo.
-// Solo nombre y descripción, sin cifras, porque no hay resultados publicables
-// verificados.
+// Portfolio real, tomado de la presentación institucional y de la propuesta de
+// trabajo. Solo la cuenta y el tipo de empresa que es.
 const casos = [
-  {
-    cuenta: 'Building Networks',
-    resumen:
-      'Consultoría, diseño, producción y ejecución de la estrategia comercial completa, con el control centralizado en HubSpot.',
-  },
-  {
-    cuenta: 'ERKS',
-    resumen:
-      'Estrategia comercial integral durante 2024, con producción de todas las piezas necesarias para aplicarla.',
-  },
-  {
-    cuenta: 'Innova House',
-    resumen:
-      'Consultoría, diseño, producción y ejecución de la estrategia comercial, con campaña de prospección en frío en marcha.',
-  },
-  {
-    cuenta: 'Financers',
-    resumen:
-      'Producción de todos los materiales comunicacionales digitales y operación del CRM como sistema central.',
-  },
+  { cuenta: 'Building Networks', tipo: 'Servicios IT' },
+  { cuenta: 'ERKS', tipo: 'Tecnologías inmersivas' },
+  { cuenta: 'Innova House', tipo: 'Desarrolladora inmobiliaria' },
+  { cuenta: 'Financers', tipo: 'Fintech' },
 ];
 ---
 
@@ -38,12 +21,12 @@ const casos = [
       </p>
     </div>
 
-    <div class="mt-14 grid gap-4 md:grid-cols-2">
+    <div class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
         casos.map((c) => (
-          <article class="rounded-[10px] border border-line bg-mist p-7 md:p-8">
+          <article class="rounded-[10px] border border-line bg-mist p-7">
             <h3 class="text-xl font-normal tracking-tight">{c.cuenta}</h3>
-            <p class="mt-4 text-base leading-relaxed text-muted">{c.resumen}</p>
+            <p class="mt-2 text-base leading-relaxed text-muted">{c.tipo}</p>
           </article>
         ))
       }
