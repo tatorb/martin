@@ -1,4 +1,5 @@
 ---
+import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 import Cta from './Cta.astro';
 import { VSL_EMBED_URL, VSL_POSTER_URL } from '../site.config';
 
@@ -25,7 +26,8 @@ const apoyos = [
 const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
 ---
 
-<section class="border-b border-line/70">
+<section style={`padding:0 ${PAGE_INSET}px`}>
+  <div class="bg-paper" style={`border-radius:${PAGE_RADIUS}px`}>
   <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
     <div class="mx-auto max-w-3xl text-center">
       <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
@@ -102,6 +104,7 @@ const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
     <div class="mt-14 flex justify-center">
       <Cta variant="outline" label="Quiero ver si aplica a mi caso" />
     </div>
+  </div>
   </div>
 </section>
 

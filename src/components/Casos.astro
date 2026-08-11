@@ -1,4 +1,5 @@
 ---
+import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 // Portfolio real, tomado de la presentación institucional y de la propuesta de
 // trabajo. Solo la cuenta y el tipo de empresa que es.
 const casos = [
@@ -9,7 +10,8 @@ const casos = [
 ];
 ---
 
-<section id="casos" class="border-b border-line/70">
+<section id="casos" style={`padding:0 ${PAGE_INSET}px`}>
+  <div class="bg-paper" style={`border-radius:${PAGE_RADIUS}px`}>
   <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
     <div class="max-w-3xl">
       <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
@@ -31,5 +33,6 @@ const casos = [
         ))
       }
     </div>
+  </div>
   </div>
 </section>

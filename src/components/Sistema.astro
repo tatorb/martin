@@ -1,4 +1,5 @@
 ---
+import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 import Cta from './Cta.astro';
 
 // Sistema de trabajo, con los mismos cuatro pasos que el sitio institucional.
@@ -44,7 +45,8 @@ const beneficios = [
 ];
 ---
 
-<section id="sistema" class="border-b border-line/70">
+<section id="sistema" style={`padding:0 ${PAGE_INSET}px`}>
+  <div class="bg-paper" style={`border-radius:${PAGE_RADIUS}px`}>
   <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
     <div class="max-w-3xl">
       <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
@@ -100,5 +102,6 @@ const beneficios = [
     <div class="mt-14">
       <Cta label="Agendar la primera reunión" />
     </div>
+  </div>
   </div>
 </section>

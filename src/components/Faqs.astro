@@ -1,4 +1,6 @@
 ---
+import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
+
 // Respuestas apoyadas en los plazos y el alcance de la propuesta de trabajo,
 // y en el modelo de estados del protocolo de trabajo de MRB.
 const faqs = [
@@ -37,7 +39,8 @@ const faqs = [
 ];
 ---
 
-<section id="faqs" class="border-b border-line/70">
+<section id="faqs" style={`padding:0 ${PAGE_INSET}px`}>
+  <div class="bg-paper" style={`border-radius:${PAGE_RADIUS}px`}>
   <div class="mx-auto max-w-4xl px-6 py-20 md:py-28">
     <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
       Lo que suelen preguntarnos antes de empezar
@@ -62,5 +65,6 @@ const faqs = [
         ))
       }
     </div>
+  </div>
   </div>
 </section>
