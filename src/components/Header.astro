@@ -1,12 +1,11 @@
 ---
 import Cta from './Cta.astro';
 import Logo from './Logo.astro';
-import HeaderShape, { BLOCK_H, CENTER_W, CAP_W, PAGE_INSET } from './HeaderShape.astro';
+import HeaderShape, { BLOCK_H, CAP_W, PAGE_INSET, STRIP_PCT } from './HeaderShape.astro';
 
-// El contenido vive siempre dentro de la zona plana. Al restar las dos tapas,
-// en pantallas angostas tampoco se mete sobre las curvas.
-const contentW = CENTER_W - CAP_W * 2;
-const contentWidth = `min(${contentW}px, 100% - ${CAP_W * 2}px)`;
+// El contenido se alinea con la zona plana de la barra, corriéndose lo que ocupan
+// la tira y el mordido de cada lado. Así nunca se mete sobre las curvas.
+const contentInset = `calc(${STRIP_PCT}% + ${CAP_W}px)`;
 
 // Padding interno de la barra en el sitio institucional.
 const BAR_PAD = 15;
@@ -24,8 +23,8 @@ const BAR_PAD = 15;
     <HeaderShape />
 
     <div
-      class="relative mx-auto flex h-full items-center justify-between gap-4"
-      style={`width:${contentWidth};padding:0 ${BAR_PAD}px`}
+      class="relative flex h-full items-center justify-between gap-4"
+      style={`margin:0 ${contentInset};padding:0 ${BAR_PAD}px`}
     >
       <a href="#contenido" class="text-ink" aria-label="Studio MRB, inicio">
         {/* 20px, la proporción que tiene contra el botón de 35px en el original.

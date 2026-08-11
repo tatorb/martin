@@ -9,16 +9,20 @@
 export const STRIP_H = 20; // alto de la tira fina
 export const BLOCK_H = 64; // alto total de la parte ancha, tira incluida
 
-// Las piezas del mordido miden 20 x 20 en el original, de ahí el radio.
-// El tope es la mitad del salto de altura, (64 - 20) / 2 = 22, porque los dos
-// arcos tienen que repartírselo. Con 20 entran y queda un tramo recto vertical
-// de 4px entre ellos.
-export const RADIUS = 20;
+// La pieza de 20 x 20 del original es toda la zona de transición, no un arco.
+// Los dos arcos se reparten ese ancho, así que el radio es 10. El resto del
+// salto de altura, 44 menos los 20 que cubren los arcos, queda como tramo recto
+// vertical, que es lo que hace que el mordido se lea discreto.
+export const RADIUS = 10;
 export const CAP_W = RADIUS * 2; // el ancho de la tapa lo fija el radio
-export const CENTER_W = 1240; // ancho total de la parte ancha, curvas incluidas
 export const PAGE_INSET = 10; // margen lateral del contenedor del hero
 export const PAGE_RADIUS = 28; // radio de sus esquinas, que la silueta tiene que respetar
-export const FLAT_W = CENTER_W - CAP_W * 2;
+
+// La tira no es un sobrante, es proporcional. Medido en el sitio institucional
+// a 1070px de viewport, donde el bloque disponible es 1050, la tira mide 48.72
+// por lado. De ahí el 4.64 por ciento. Los 20 del mordido y el resto para la
+// barra completan los 1050 exactos.
+export const STRIP_PCT = 4.64;
 
 // La transición son dos arcos de círculo tangentes, no una Bézier. El primero
 // sale horizontal desde la parte ancha y llega vertical, el segundo arranca
@@ -44,8 +48,8 @@ const capPath = [
   style={`height:${BLOCK_H}px`}
 >
   <div
-    class="flex-1 bg-current"
-    style={`height:${STRIP_H}px;border-top-left-radius:${PAGE_RADIUS}px`}
+    class="bg-current"
+    style={`flex:0 0 ${STRIP_PCT}%;height:${STRIP_H}px;border-top-left-radius:${PAGE_RADIUS}px`}
   >
   </div>
 
@@ -59,7 +63,7 @@ const capPath = [
     <path d={capPath}></path>
   </svg>
 
-  <div class="bg-current" style={`height:${BLOCK_H}px;width:min(${FLAT_W}px,100%)`}></div>
+  <div class="flex-1 bg-current" style={`height:${BLOCK_H}px`}></div>
 
   <svg
     width={CAP_W}
@@ -72,8 +76,8 @@ const capPath = [
   </svg>
 
   <div
-    class="flex-1 bg-current"
-    style={`height:${STRIP_H}px;border-top-right-radius:${PAGE_RADIUS}px`}
+    class="bg-current"
+    style={`flex:0 0 ${STRIP_PCT}%;height:${STRIP_H}px;border-top-right-radius:${PAGE_RADIUS}px`}
   >
   </div>
 </div>
