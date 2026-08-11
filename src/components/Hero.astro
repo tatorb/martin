@@ -1,5 +1,6 @@
 ---
 import Cta from './Cta.astro';
+import { BLOCK_H, PAGE_INSET } from './HeaderShape.astro';
 
 // Cifras estructurales del programa, tomadas de la propuesta de trabajo.
 const marcas = [
@@ -9,47 +10,52 @@ const marcas = [
 ];
 ---
 
-<section id="contenido" class="bg-shell px-3 pb-3">
-  <div class="relative isolate overflow-hidden rounded-[28px] bg-shell">
-    <!-- Degradé de base y tres manchas que derivan muy lento por encima. -->
+<!-- El contenedor va contra el borde superior de la página. El header se apoya
+     encima, por eso el contenido arranca despejando su alto. -->
+<section id="contenido" style={`padding:0 ${PAGE_INSET}px`}>
+  <div class="relative isolate overflow-hidden rounded-[28px] text-paper">
+    <!-- Degradé oscuro y tres manchas que derivan por encima. -->
     <div aria-hidden="true" class="aurora pointer-events-none absolute inset-0">
       <span class="mancha mancha-a"></span>
       <span class="mancha mancha-b"></span>
       <span class="mancha mancha-c"></span>
     </div>
 
-    <div class="relative mx-auto max-w-6xl px-6 pb-24 pt-20 md:pb-32 md:pt-28">
-    <p class="eyebrow">Apertura de Cuentas</p>
-
-    <h1
-      class="mt-6 max-w-4xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+    <div
+      class="relative mx-auto max-w-6xl px-6 pb-24 md:pb-32"
+      style={`padding-top:${BLOCK_H + 72}px`}
     >
-      Reuniones con los decisores<br class="hidden sm:block" /> de las cuentas que te importan
-    </h1>
+      <p class="text-xs font-bold uppercase tracking-[0.18em] text-line">Apertura de Cuentas</p>
 
-    <p class="mt-8 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
-      Tu equipo comercial cierra y cuida relaciones. Nosotros abrimos las conversaciones que
-      todavía no existen, con las empresas que elegiste y con la persona que decide, sin depender
-      de referidos ni de los clientes de siempre.
-    </p>
+      <h1
+        class="mt-6 max-w-4xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+      >
+        Reuniones con los decisores<br class="hidden sm:block" /> de las cuentas que te importan
+      </h1>
 
-    <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-      <Cta />
-      <span class="text-sm text-muted">Reunión de 30 minutos, sin costo</span>
-    </div>
+      <p class="mt-8 max-w-2xl text-lg leading-relaxed text-line md:text-xl">
+        Tu equipo comercial cierra y cuida relaciones. Nosotros abrimos las conversaciones que
+        todavía no existen, con las empresas que elegiste y con la persona que decide, sin depender
+        de referidos ni de los clientes de siempre.
+      </p>
 
-    <dl class="mt-16 grid max-w-3xl grid-cols-1 gap-px border border-line bg-line sm:grid-cols-3">
-      {
-        marcas.map((m) => (
-          <div class="bg-paper px-6 py-7">
-            <dt class="text-2xl font-bold tracking-tight">{m.valor}</dt>
-            <dd class="mt-2 text-sm leading-relaxed text-muted">{m.detalle}</dd>
-          </div>
-        ))
-      }
-    </dl>
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+        <Cta variant="light" />
+        <span class="text-sm text-line">Reunión de 30 minutos, sin costo</span>
+      </div>
 
-      <p class="mt-10 max-w-2xl text-sm leading-relaxed text-muted">
+      <dl class="mt-16 grid max-w-3xl grid-cols-1 gap-px border border-white/20 bg-white/20 sm:grid-cols-3">
+        {
+          marcas.map((m) => (
+            <div class="bg-white/5 px-6 py-7 backdrop-blur-sm">
+              <dt class="text-2xl font-bold tracking-tight">{m.valor}</dt>
+              <dd class="mt-2 text-sm leading-relaxed text-line">{m.detalle}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <p class="mt-10 max-w-2xl text-sm leading-relaxed text-line">
         Operamos sistemas de prospección para servicios IT, fintech, tecnologías inmersivas y
         desarrollo inmobiliario, en Argentina, México, Paraguay y Colombia.
       </p>
@@ -58,79 +64,77 @@ const marcas = [
 </section>
 
 <style>
-  /* Fondo del hero, un degradé de grises con tres manchas que derivan muy lento
-     por encima. Solo se animan transformaciones, así el trabajo queda en la GPU
-     y no fuerza recálculos de layout. */
+  /* Fondo del hero, un degradé oscuro con tres manchas que derivan por encima.
+     Solo se animan transformaciones, así el trabajo queda en la GPU y no fuerza
+     recálculos de layout. */
   .aurora {
-    background: linear-gradient(155deg, #f7f8f9 0%, #e4e7ea 48%, #d2d6da 100%);
+    background: linear-gradient(150deg, #3b4349 0%, #20262a 46%, #0e1113 100%);
   }
 
   .mancha {
     position: absolute;
     display: block;
     border-radius: 9999px;
-    filter: blur(90px);
+    filter: blur(80px);
     will-change: transform;
   }
 
   .mancha-a {
-    width: 70%;
+    width: 78%;
     aspect-ratio: 1;
-    top: -32%;
-    left: -12%;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0) 68%);
-    animation: deriva-a 28s ease-in-out infinite alternate;
+    top: -38%;
+    left: -16%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 68%);
+    animation: deriva-a 17s ease-in-out infinite alternate;
   }
 
+  /* El gris de marca, acá con bastante presencia porque el fondo es oscuro. */
   .mancha-b {
-    width: 62%;
+    width: 74%;
     aspect-ratio: 1;
-    bottom: -34%;
-    right: -10%;
-    background: radial-gradient(circle, rgba(178, 186, 194, 0.75) 0%, rgba(178, 186, 194, 0) 70%);
-    animation: deriva-b 36s ease-in-out infinite alternate;
+    bottom: -40%;
+    right: -14%;
+    background: radial-gradient(circle, rgba(91, 115, 130, 0.85) 0%, rgba(91, 115, 130, 0) 70%);
+    animation: deriva-b 21s ease-in-out infinite alternate;
   }
 
-  /* Un dejo del gris de marca, apenas perceptible, para que el fondo no quede neutro del todo. */
   .mancha-c {
-    width: 52%;
+    width: 60%;
     aspect-ratio: 1;
-    top: 22%;
-    left: 38%;
-    background: radial-gradient(circle, rgba(91, 115, 130, 0.16) 0%, rgba(91, 115, 130, 0) 70%);
-    animation: deriva-c 44s ease-in-out infinite alternate;
+    top: 16%;
+    left: 34%;
+    background: radial-gradient(circle, rgba(143, 163, 174, 0.45) 0%, rgba(143, 163, 174, 0) 70%);
+    animation: deriva-c 26s ease-in-out infinite alternate;
   }
 
   @keyframes deriva-a {
     from {
-      transform: translate3d(0, 0, 0) scale(1);
+      transform: translate3d(-6%, -4%, 0) scale(0.9);
     }
     to {
-      transform: translate3d(14%, 10%, 0) scale(1.14);
+      transform: translate3d(26%, 22%, 0) scale(1.35);
     }
   }
 
   @keyframes deriva-b {
     from {
-      transform: translate3d(0, 0, 0) scale(1.08);
+      transform: translate3d(8%, 6%, 0) scale(1.25);
     }
     to {
-      transform: translate3d(-16%, -12%, 0) scale(1);
+      transform: translate3d(-28%, -20%, 0) scale(0.92);
     }
   }
 
   @keyframes deriva-c {
     from {
-      transform: translate3d(0, 0, 0) scale(1);
+      transform: translate3d(10%, -8%, 0) scale(0.95);
     }
     to {
-      transform: translate3d(-12%, 14%, 0) scale(1.2);
+      transform: translate3d(-22%, 24%, 0) scale(1.4);
     }
   }
 
-  /* El bloque global de prefers-reduced-motion ya congela estas animaciones,
-     pero dejamos las manchas quietas en una posición intermedia para que el
-     fondo siga leyéndose bien sin movimiento. */
+  /* El bloque global de prefers-reduced-motion ya congela estas animaciones. */
   @media (prefers-reduced-motion: reduce) {
     .mancha {
       transform: none;

@@ -11,8 +11,11 @@ import Faqs from '../components/Faqs.astro';
 import Footer from '../components/Footer.astro';
 ---
 
+{/* El header se posiciona absoluto sobre el hero, por eso el envoltorio es relativo. */}
 <Base>
-  <Header />
+  <div class="relative">
+    <Header />
+  </div>
   <main>
     <Hero />
     <Vsl />

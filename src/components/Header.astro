@@ -1,7 +1,7 @@
 ---
 import Cta from './Cta.astro';
 import Logo from './Logo.astro';
-import HeaderShape, { BLOCK_H, CENTER_W, CAP_W } from './HeaderShape.astro';
+import HeaderShape, { BLOCK_H, CENTER_W, CAP_W, PAGE_INSET } from './HeaderShape.astro';
 
 // El contenido vive siempre dentro de la zona plana. Al restar las dos tapas,
 // en pantallas angostas tampoco se mete sobre las curvas.
@@ -9,19 +9,25 @@ const contentW = CENTER_W - CAP_W * 2;
 const contentWidth = `min(${contentW}px, 100% - ${CAP_W * 2}px)`;
 ---
 
-{/* La banda va en gris para que la silueta blanca se recorte, tanto sobre el hero
-    como sobre las secciones blancas cuando el header queda fijo al hacer scroll. */}
-<header class="sticky top-0 z-40 bg-shell" style={`height:${BLOCK_H}px`}>
-  <HeaderShape />
+{/* El header se apoya sobre el contenedor del hero, que llega hasta el borde
+    superior de la página. Por eso va absoluto y con el mismo margen lateral,
+    para que la silueta quede contenida dentro del bloque oscuro. */}
+<header
+  class="absolute inset-x-0 top-0 z-40"
+  style={`height:${BLOCK_H}px;padding:0 ${PAGE_INSET}px`}
+>
+  <div class="relative h-full">
+    <HeaderShape />
 
-  <div
-    class="relative mx-auto flex h-full items-center justify-between gap-4"
-    style={`width:${contentWidth}`}
-  >
-    <a href="#contenido" class="text-ink" aria-label="Studio MRB, inicio">
-      <Logo class="h-[26px]" />
-    </a>
+    <div
+      class="relative mx-auto flex h-full items-center justify-between gap-4"
+      style={`width:${contentWidth}`}
+    >
+      <a href="#contenido" class="text-ink" aria-label="Studio MRB, inicio">
+        <Logo class="h-[26px]" />
+      </a>
 
-    <Cta label="Agendar" size="sm" />
+      <Cta label="Agendar" size="sm" />
+    </div>
   </div>
 </header>

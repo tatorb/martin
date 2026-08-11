@@ -3,7 +3,7 @@
 // icono, igual que el de studiomrb.com.
 interface Props {
   label?: string;
-  variant?: 'solid' | 'outline';
+  variant?: 'solid' | 'outline' | 'light';
   size?: 'sm' | 'md';
   class?: string;
 }
@@ -26,6 +26,7 @@ const sizes = {
 const styles = {
   solid: 'bg-ink text-paper hover:bg-accent',
   outline: 'border border-ink text-ink hover:bg-ink hover:text-paper',
+  light: 'bg-paper text-ink hover:bg-line', // para fondos oscuros, como el hero
 };
 ---
 

@@ -9,6 +9,8 @@ export const BLOCK_H = 64; // alto de la parte ancha
 export const RADIUS = 16; // radio de cada arco de la transición
 export const CAP_W = RADIUS * 2; // el ancho de la tapa lo fija el radio
 export const CENTER_W = 1240; // ancho total de la parte ancha, curvas incluidas
+export const PAGE_INSET = 10; // margen lateral del contenedor del hero
+export const PAGE_RADIUS = 28; // radio de sus esquinas, que la silueta tiene que respetar
 export const FLAT_W = CENTER_W - CAP_W * 2;
 
 // La transición son dos arcos de círculo tangentes, no una Bézier. El primero
@@ -34,7 +36,11 @@ const capPath = [
   class="pointer-events-none absolute inset-x-0 top-0 flex justify-center text-paper"
   style={`height:${BLOCK_H}px`}
 >
-  <div class="flex-1 bg-current" style={`height:${STRIP_H}px`}></div>
+  <div
+    class="flex-1 bg-current"
+    style={`height:${STRIP_H}px;border-top-left-radius:${PAGE_RADIUS}px`}
+  >
+  </div>
 
   <svg
     width={CAP_W}
@@ -58,5 +64,9 @@ const capPath = [
     <path d={capPath}></path>
   </svg>
 
-  <div class="flex-1 bg-current" style={`height:${STRIP_H}px`}></div>
+  <div
+    class="flex-1 bg-current"
+    style={`height:${STRIP_H}px;border-top-right-radius:${PAGE_RADIUS}px`}
+  >
+  </div>
 </div>
