@@ -1,7 +1,13 @@
 ---
 import Cta from './Cta.astro';
 import Logo from './Logo.astro';
-import HeaderShape, { BLOCK_H, CAP_W, PAGE_INSET, STRIP_PCT } from './HeaderShape.astro';
+import HeaderShape, {
+  BLOCK_H,
+  CAP_W,
+  PAGE_INSET,
+  PAGE_RADIUS,
+  STRIP_PCT,
+} from './HeaderShape.astro';
 
 // El contenido se alinea con la zona plana de la barra, corriéndose lo que ocupan
 // la tira y el mordido de cada lado. Así nunca se mete sobre las curvas.
@@ -19,7 +25,14 @@ const BAR_PAD = 15;
   class="fixed inset-x-0 top-0 z-50 drop-shadow-[0_1px_3px_rgba(0,0,0,0.10)]"
   style={`height:${BLOCK_H}px;padding:0 ${PAGE_INSET}px`}
 >
-  <div class="relative h-full">
+  {/* El recorte va acá y no en cada tira. Si cada pieza llevara su propio radio,
+      CSS lo achicaría al no entrar en los 20px de alto de la tira, y no empalmaría
+      con la esquina del contenedor del hero. Recortando todo el bloque con el mismo
+      radio, las dos esquinas coinciden. */}
+  <div
+    class="relative h-full overflow-hidden"
+    style={`border-radius:${PAGE_RADIUS}px ${PAGE_RADIUS}px 0 0`}
+  >
     <HeaderShape />
 
     <div
@@ -32,7 +45,7 @@ const BAR_PAD = 15;
         <Logo class="h-5" />
       </a>
 
-      <Cta label="Agendar" size="sm" />
+      <Cta label="Agendar" size="sm" icon={false} />
     </div>
   </div>
 </header>

@@ -1,6 +1,6 @@
 ---
 import Cta from './Cta.astro';
-import { BLOCK_H, PAGE_INSET } from './HeaderShape.astro';
+import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 
 // Cifras estructurales del programa, tomadas de la propuesta de trabajo.
 const marcas = [
@@ -13,7 +13,10 @@ const marcas = [
 <!-- El contenedor va contra el borde superior de la página. El header se apoya
      encima, por eso el contenido arranca despejando su alto. -->
 <section id="contenido" style={`padding:0 ${PAGE_INSET}px`}>
-  <div class="relative isolate overflow-hidden rounded-[28px] text-paper">
+  <div
+    class="relative isolate overflow-hidden text-paper"
+    style={`border-radius:${PAGE_RADIUS}px`}
+  >
     <!-- Degradé oscuro y tres manchas que derivan por encima. -->
     <div aria-hidden="true" class="aurora pointer-events-none absolute inset-0">
       <span class="mancha mancha-a"></span>
@@ -25,10 +28,8 @@ const marcas = [
       class="relative mx-auto max-w-6xl px-6 pb-24 md:pb-32"
       style={`padding-top:${BLOCK_H + 72}px`}
     >
-      <p class="text-xs font-bold uppercase tracking-[0.18em] text-line">Apertura de Cuentas</p>
-
       <h1
-        class="mt-6 max-w-4xl text-4xl font-bold leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+        class="max-w-4xl text-4xl font-normal leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
       >
         Reuniones con los decisores<br class="hidden sm:block" /> de las cuentas que te importan
       </h1>
@@ -40,14 +41,15 @@ const marcas = [
       </p>
 
       <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-        <Cta variant="light" />
+        {/* Mismas dimensiones que el del header. */}
+        <Cta variant="light" size="sm" />
         <span class="text-sm text-line">Reunión de 30 minutos, sin costo</span>
       </div>
 
-      <dl class="mt-16 grid max-w-3xl grid-cols-1 gap-px border border-white/20 bg-white/20 sm:grid-cols-3">
+      <dl class="mt-16 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
         {
           marcas.map((m) => (
-            <div class="bg-white/5 px-6 py-7 backdrop-blur-sm">
+            <div class="rounded-[10px] border border-white/15 bg-white/5 p-6 backdrop-blur-sm">
               <dt class="text-2xl font-bold tracking-tight">{m.valor}</dt>
               <dd class="mt-2 text-sm leading-relaxed text-line">{m.detalle}</dd>
             </div>

@@ -1,10 +1,11 @@
 ---
-// Botón del sistema de Studio MRB. Píldora negra, mayúscula solo inicial y sin
-// icono, igual que el de studiomrb.com.
+// Botón del sistema de Studio MRB, con las medidas del sitio institucional.
 interface Props {
   label?: string;
   variant?: 'solid' | 'outline' | 'light';
   size?: 'sm' | 'md';
+  /** La flecha va en los botones del cuerpo. El del header no la lleva. */
+  icon?: boolean;
   class?: string;
 }
 
@@ -12,11 +13,12 @@ const {
   label = 'Agendar una reunión',
   variant = 'solid',
   size = 'md',
+  icon = true,
   class: extra = '',
 } = Astro.props;
 
 const base =
-  'inline-flex items-center justify-center rounded-xl font-medium transition-colors duration-200';
+  'inline-flex items-center justify-center gap-2.5 rounded-md font-medium transition-colors duration-200';
 
 const sizes = {
   // Medidas del botón del sitio institucional, 15px Urbanist y padding 10px 20px,
@@ -34,4 +36,11 @@ const styles = {
 
 <a href="#agenda" class:list={[base, sizes[size], styles[variant], extra]}>
   {label}
+  {
+    icon && (
+      <svg width="17" height="12" viewBox="0 0 17 12" fill="none" aria-hidden="true">
+        <path d="M0 6h15M10.5 1l5 5-5 5" stroke="currentColor" stroke-width="1.5" />
+      </svg>
+    )
+  }
 </a>

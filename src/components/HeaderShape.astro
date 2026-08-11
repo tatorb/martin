@@ -16,7 +16,7 @@ export const BLOCK_H = 64; // alto total de la parte ancha, tira incluida
 export const RADIUS = 10;
 export const CAP_W = RADIUS * 2; // el ancho de la tapa lo fija el radio
 export const PAGE_INSET = 10; // margen lateral del contenedor del hero
-export const PAGE_RADIUS = 28; // radio de sus esquinas, que la silueta tiene que respetar
+export const PAGE_RADIUS = 10; // radio de sus esquinas, el mismo que el del mordido
 
 // La tira no es un sobrante, es proporcional. Medido en el sitio institucional
 // a 1070px de viewport, donde el bloque disponible es 1050, la tira mide 48.72
@@ -49,7 +49,7 @@ const capPath = [
 >
   <div
     class="bg-current"
-    style={`flex:0 0 ${STRIP_PCT}%;height:${STRIP_H}px;border-top-left-radius:${PAGE_RADIUS}px`}
+    style={`flex:0 0 ${STRIP_PCT}%;height:${STRIP_H}px`}
   >
   </div>
 
@@ -77,7 +77,7 @@ const capPath = [
 
   <div
     class="bg-current"
-    style={`flex:0 0 ${STRIP_PCT}%;height:${STRIP_H}px;border-top-right-radius:${PAGE_RADIUS}px`}
+    style={`flex:0 0 ${STRIP_PCT}%;height:${STRIP_H}px`}
   >
   </div>
 </div>

@@ -25,12 +25,11 @@ const apoyos = [
 const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
 ---
 
-<section class="border-b border-line/70 bg-paper">
+<section class="border-b border-line/70">
   <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
     <div class="mx-auto max-w-3xl text-center">
-      <p class="eyebrow">Mirá cómo funciona</p>
-      <h2 class="mt-5 text-3xl font-bold leading-tight tracking-tight md:text-4xl">
-        Mirá el sistema completo explicado en un video
+      <h2 class="text-3xl font-bold leading-tight tracking-tight md:text-4xl">
+        ¿Cómo funciona?
       </h2>
     </div>
 
@@ -40,7 +39,7 @@ const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
           usaFachada ? (
             <div
               id="vsl"
-              class="relative aspect-video w-full overflow-hidden border border-line bg-ink"
+              class="relative aspect-video w-full overflow-hidden rounded-[10px] bg-ink"
               data-embed={VSL_EMBED_URL}
             >
               <img
@@ -61,7 +60,7 @@ const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
               </button>
             </div>
           ) : (
-            <div class="aspect-video w-full overflow-hidden border border-line bg-ink">
+            <div class="aspect-video w-full overflow-hidden rounded-[10px] bg-ink">
               <iframe
                 src={VSL_EMBED_URL}
                 title="Apertura de Cuentas, Studio MRB"
@@ -73,7 +72,7 @@ const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
             </div>
           )
         ) : (
-          <div class="flex aspect-video w-full flex-col items-center justify-center border border-dashed border-line bg-paper px-6 text-center">
+          <div class="flex aspect-video w-full flex-col items-center justify-center rounded-[10px] border border-dashed border-line bg-mist px-6 text-center">
             <svg width="34" height="40" viewBox="0 0 22 26" aria-hidden="true" class="text-line">
               <path d="M0 0l22 13L0 26z" fill="currentColor" />
             </svg>
@@ -89,10 +88,10 @@ const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
       }
     </div>
 
-    <div class="mt-14 grid gap-px border border-line bg-line md:grid-cols-3">
+    <div class="mt-14 grid gap-4 md:grid-cols-3">
       {
         apoyos.map((a) => (
-          <div class="bg-paper px-7 py-8">
+          <div class="rounded-[10px] border border-line bg-mist p-7">
             <h3 class="text-sm font-semibold uppercase tracking-[0.14em] text-accent">{a.titulo}</h3>
             <p class="mt-4 text-base leading-relaxed text-muted">{a.texto}</p>
           </div>
