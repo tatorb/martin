@@ -7,6 +7,9 @@ import HeaderShape, { BLOCK_H, CENTER_W, CAP_W, PAGE_INSET } from './HeaderShape
 // en pantallas angostas tampoco se mete sobre las curvas.
 const contentW = CENTER_W - CAP_W * 2;
 const contentWidth = `min(${contentW}px, 100% - ${CAP_W * 2}px)`;
+
+// Padding interno de la barra en el sitio institucional.
+const BAR_PAD = 15;
 ---
 
 {/* Fijo, como en el sitio institucional. Lleva el mismo margen lateral que el
@@ -22,10 +25,12 @@ const contentWidth = `min(${contentW}px, 100% - ${CAP_W * 2}px)`;
 
     <div
       class="relative mx-auto flex h-full items-center justify-between gap-4"
-      style={`width:${contentWidth}`}
+      style={`width:${contentWidth};padding:0 ${BAR_PAD}px`}
     >
       <a href="#contenido" class="text-ink" aria-label="Studio MRB, inicio">
-        <Logo class="h-[26px]" />
+        {/* 20px, la proporción que tiene contra el botón de 35px en el original.
+            Va como clase literal porque Tailwind no detecta clases construidas. */}
+        <Logo class="h-5" />
       </a>
 
       <Cta label="Agendar" size="sm" />
