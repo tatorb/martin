@@ -27,7 +27,7 @@
   html {
     scroll-behavior: smooth;
     /* Deja aire bajo el header fijo cuando un CTA ancla a #agenda. */
-    scroll-padding-top: 60px;
+    scroll-padding-top: 80px;
     -webkit-text-size-adjust: 100%;
   }
 

@@ -4,14 +4,16 @@
 //
 // La forma se parte en cinco piezas para que solo estiren los tramos rectos.
 // Las tapas son SVG de ancho fijo, así las curvas nunca se deforman.
-// Medidas del sitio institucional, tira de 20px y barra de 44px.
+// Medidas del sitio institucional. La tira mide 20px y la parte ancha 44px más,
+// contados por debajo de la tira, así que el alto total del bloque es 64.
 export const STRIP_H = 20; // alto de la tira fina
-export const BLOCK_H = 44; // alto de la parte ancha
+export const BLOCK_H = 64; // alto total de la parte ancha, tira incluida
 
-// Los dos arcos tienen que repartirse el salto de altura, 44 menos 20, o sea 24.
-// Con radio 12 cada uno cubre justo la mitad, se tocan con tangente vertical y no
-// queda tramo recto. Es el radio más grande que entra en una barra de 44.
-export const RADIUS = (BLOCK_H - STRIP_H) / 2;
+// Las piezas del mordido miden 20 x 20 en el original, de ahí el radio.
+// El tope es la mitad del salto de altura, (64 - 20) / 2 = 22, porque los dos
+// arcos tienen que repartírselo. Con 20 entran y queda un tramo recto vertical
+// de 4px entre ellos.
+export const RADIUS = 20;
 export const CAP_W = RADIUS * 2; // el ancho de la tapa lo fija el radio
 export const CENTER_W = 1240; // ancho total de la parte ancha, curvas incluidas
 export const PAGE_INSET = 10; // margen lateral del contenedor del hero
@@ -23,8 +25,8 @@ export const FLAT_W = CENTER_W - CAP_W * 2;
 // vertical y sale horizontal sobre la tira fina. Así el empalme entre curva y
 // contracurva es exactamente vertical, no una aproximación.
 //
-// Con el radio en la mitad exacta del salto los dos arcos se tocan y el tramo
-// recto entre ellos queda en cero, que es el caso límite.
+// Como el radio es menor que la mitad del salto de altura, entre los dos arcos
+// queda además un tramo recto vertical, igual que en la referencia.
 const capPath = [
   `M 0,0`,
   `L ${CAP_W},0`,
