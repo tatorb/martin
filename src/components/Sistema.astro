@@ -2,12 +2,45 @@
 import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 import Cta from './Cta.astro';
 
-// Sistema de trabajo, con los mismos cuatro pasos que el sitio institucional.
+// Sistema de trabajo, copiado del deck de discovery.
 const etapas = [
-  { n: '1', fuerte: 'Diseño', resto: 'de estrategia' },
-  { n: '2', fuerte: 'Set up', resto: 'del sistema' },
-  { n: '3', fuerte: 'Ejecución', resto: 'de campañas' },
-  { n: '4', fuerte: 'Hand off', resto: 'a comercial' },
+  {
+    n: '1',
+    fuerte: 'Diseño',
+    resto: 'de estrategia',
+    texto:
+      'Definimos el perfil de cuenta objetivo, los criterios de segmentación y el enfoque de abordaje según tu oferta, mercado y tipo de venta.',
+  },
+  {
+    n: '2',
+    fuerte: 'Set up',
+    resto: 'del sistema',
+    texto:
+      'Configuramos el sistema de acceso comercial, cuentas, decisores reales, canales, mensajes y herramientas necesarias para ejecutar de forma consistente.',
+  },
+  {
+    n: '3',
+    fuerte: 'Ejecución',
+    resto: 'de campañas',
+    texto:
+      'Activamos contactos directos y contextualizados con decisores clave, priorizando relevancia, timing y encaje con el negocio.',
+  },
+  {
+    n: '4',
+    fuerte: 'Hand off',
+    resto: 'a comercial',
+    texto:
+      'Entregamos la oportunidad calificada al vendedor senior y acompañamos la transición para asegurar continuidad y correcta gestión comercial.',
+    destacada: true,
+  },
+];
+
+// Franja de resultados del mismo deck.
+const resultados = [
+  { icono: 'diana', texto: '8 a 12 conversaciones mensuales' },
+  { icono: 'persona', texto: 'con decisores reales' },
+  { icono: 'edificio', texto: 'en cuentas claves' },
+  { icono: 'tendencia', texto: 'para sumar al pipeline' },
 ];
 
 // Lo que entra en el programa, según los roles y recursos de la propuesta.
@@ -52,25 +85,89 @@ const beneficios = [
       <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
         Sistema de trabajo
       </h2>
-      <p class="mt-6 text-lg leading-relaxed text-muted">
-        Cuatro pasos, cada uno con un entregable concreto. El último es el que importa, las
-        conversaciones calificadas pasan a tu equipo comercial.
-      </p>
     </div>
 
     <ol class="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
       {
         etapas.map((e) => (
-          <li class="rounded-[10px] border border-line bg-mist p-7">
-            <span class="block text-3xl font-light leading-none text-muted">{e.n}</span>
+          <li
+            class:list={[
+              'rounded-[10px] border p-7',
+              e.destacada ? 'border-ink bg-ink text-paper' : 'border-line bg-mist',
+            ]}
+          >
+            <span
+              class:list={[
+                'block text-3xl font-light leading-none',
+                e.destacada ? 'text-line' : 'text-muted',
+              ]}
+            >
+              {e.n}
+            </span>
             <p class="mt-6 text-lg uppercase leading-snug tracking-tight">
               <span class="font-bold">{e.fuerte}</span>
               <span class="block font-normal">{e.resto}</span>
+            </p>
+            <p
+              class:list={['mt-5 text-sm leading-relaxed', e.destacada ? 'text-line' : 'text-muted']}
+            >
+              {e.texto}
             </p>
           </li>
         ))
       }
     </ol>
+
+    <h3 class="mt-16 text-2xl font-normal tracking-tight md:text-3xl">Resultados</h3>
+
+    <ul class="mt-6 grid gap-px overflow-hidden rounded-[10px] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+      {
+        resultados.map((r) => (
+          <li class="flex flex-col items-center gap-4 bg-mist px-6 py-9 text-center">
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.4"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              class="text-ink"
+            >
+              {r.icono === 'diana' && (
+                <g>
+                  <circle cx="12" cy="12" r="8" />
+                  <circle cx="12" cy="12" r="3.4" />
+                </g>
+              )}
+              {r.icono === 'persona' && (
+                <g>
+                  <circle cx="10" cy="8" r="3.6" />
+                  <path d="M3.5 20c0-3.6 2.9-6.5 6.5-6.5 1.3 0 2.5.4 3.5 1" />
+                  <path d="M15.5 17.5l2 2 4-4" />
+                </g>
+              )}
+              {r.icono === 'edificio' && (
+                <g>
+                  <path d="M5 21V5.5C5 4.7 5.7 4 6.5 4h7c.8 0 1.5.7 1.5 1.5V21" />
+                  <path d="M15 10h3.5c.8 0 1.5.7 1.5 1.5V21" />
+                  <path d="M3 21h18M8.5 8h3M8.5 12h3M8.5 16h3" />
+                </g>
+              )}
+              {r.icono === 'tendencia' && (
+                <g>
+                  <path d="M3 17l6-6 4 4 8-8" />
+                  <path d="M15 7h6v6" />
+                </g>
+              )}
+            </svg>
+            <span class="text-sm leading-relaxed text-muted">{r.texto}</span>
+          </li>
+        ))
+      }
+    </ul>
 
     <p
       class="mt-14 rounded-[10px] border border-line border-l-2 border-l-accent bg-mist px-7 py-8 text-lg leading-relaxed text-ink md:px-9 md:text-xl"
