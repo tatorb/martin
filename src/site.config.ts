@@ -40,7 +40,7 @@ export const FOUNDER_PHOTO_URL = '';
 
 export const CONTACT = {
   name: 'Martín Rodriguez Brusco',
-  role: 'Managing Partner',
+  role: 'Executive Director',
   email: 'martin@studiomrb.com',
   phone: '+54 9 351 5925185',
   phoneHref: '+5493515925185',
