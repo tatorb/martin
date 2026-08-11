@@ -17,9 +17,10 @@ const BAR_PAD = 15;
   class="fixed inset-x-0 top-0 z-50"
   style={`height:${BLOCK_H}px;padding:0 ${PAGE_INSET}px`}
 >
-    {/* El redondeo de los extremos va en las tiras, no como recorte del bloque.
-      Con el radio en 10 entra holgado en los 20px de alto de la tira, así que ya
-      no se deforma como cuando el radio era 28. */}
+  {/* Los extremos de la tira van en escuadra, sin redondeo. Así su borde exterior
+      queda a ras del borde del contenedor de abajo y las dos cosas forman una sola
+      línea vertical continua. Con el extremo redondeado la tira se despegaba de esa
+      vertical y dejaba una medialuna del fondo a la vista. */}
   <div class="relative h-full">
     <HeaderShape />
 
