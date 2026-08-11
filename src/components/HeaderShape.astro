@@ -40,6 +40,23 @@ const capPath = [
   `A ${RADIUS} ${RADIUS} 0 0 0 0,${STRIP_H}`,
   `Z`,
 ].join(' ');
+
+// Terminación de los extremos. Recorriendo el contorno de derecha a izquierda,
+// el borde inferior de la tira llega hasta 20px antes del lateral de la página,
+// ahí baja con un arco del mismo radio 10 y sale con tangente vertical, y desde
+// ese punto sube recto hasta el tope, donde gira 90 grados hacia el centro.
+//
+// La vertical cae sobre los 10px del margen lateral, así que queda alineada con
+// el borde de los contenedores de la página.
+const END_W = RADIUS; // el arco recorre un radio en horizontal
+const END_DROP = STRIP_H + RADIUS; // hasta dónde baja el gancho del extremo
+const endPath = [
+  `M 0,0`,
+  `L ${END_W},0`,
+  `L ${END_W},${STRIP_H}`,
+  `A ${RADIUS} ${RADIUS} 0 0 0 0,${END_DROP}`,
+  `Z`,
+].join(' ');
 ---
 
 <div
@@ -47,9 +64,19 @@ const capPath = [
   class="pointer-events-none absolute inset-x-0 top-0 flex justify-center text-paper"
   style={`height:${BLOCK_H}px`}
 >
+  <svg
+    width={END_W}
+    height={BLOCK_H}
+    viewBox={`0 0 ${END_W} ${BLOCK_H}`}
+    fill="currentColor"
+    class="shrink-0"
+  >
+    <path d={endPath}></path>
+  </svg>
+
   <div
     class="bg-current"
-    style={`flex:0 0 ${STRIP_PCT}%;height:${STRIP_H}px`}
+    style={`flex:0 0 calc(${STRIP_PCT}% - ${END_W}px);height:${STRIP_H}px`}
   >
   </div>
 
@@ -77,7 +104,17 @@ const capPath = [
 
   <div
     class="bg-current"
-    style={`flex:0 0 ${STRIP_PCT}%;height:${STRIP_H}px`}
+    style={`flex:0 0 calc(${STRIP_PCT}% - ${END_W}px);height:${STRIP_H}px`}
   >
   </div>
+
+  <svg
+    width={END_W}
+    height={BLOCK_H}
+    viewBox={`0 0 ${END_W} ${BLOCK_H}`}
+    fill="currentColor"
+    class="shrink-0 -scale-x-100"
+  >
+    <path d={endPath}></path>
+  </svg>
 </div>
