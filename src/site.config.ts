@@ -33,7 +33,7 @@ export const CALENDAR_EMBED_URL =
   'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3Sa-itWHrP7z9wAibQag7-J1pJbUFqcUEKdO01XhpVzICg465f75ScKFBmBc51npBnLJZ3iFoE?gv=true';
 
 /** Alto del iframe del calendario en píxeles. Subilo si el widget queda cortado. */
-export const CALENDAR_HEIGHT = 600;
+export const CALENDAR_HEIGHT = 980;
 
 /** Foto del fundador. Ruta relativa a /public, por ejemplo '/martin.jpg'. */
 export const FOUNDER_PHOTO_URL = '';

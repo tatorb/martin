@@ -1,5 +1,6 @@
 ---
 import { CALENDAR_EMBED_URL, CALENDAR_HEIGHT, CONTACT } from '../site.config';
+import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 
 // Lo que necesitamos del lado del cliente, según la propuesta de trabajo.
 const requisitos = [
@@ -20,85 +21,83 @@ const requisitos = [
 ];
 ---
 
-<section id="agenda" class="border-b border-line/70 bg-ink text-paper">
-  <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-    <div class="max-w-3xl">
-      <h2 class="text-3xl font-bold leading-tight tracking-tight md:text-4xl">
-        Treinta minutos para ver si esto aplica a tu caso
-      </h2>
-      <p class="mt-6 text-lg leading-relaxed text-line">
-        Elegí un horario y charlamos. Vamos a mirar a qué cuentas querés llegar, cómo se está
-        vendiendo hoy y si el sistema tiene sentido para vos. Si no lo tiene, te lo decimos en esa
-        misma reunión.
-      </p>
-    </div>
-
-    <div class="mt-14 grid gap-12 lg:grid-cols-[1fr_20rem] lg:gap-16">
-      <div>
-        {
-          CALENDAR_EMBED_URL ? (
-            <iframe
-              src={CALENDAR_EMBED_URL}
-              title="Calendario para agendar una reunión con Studio MRB"
-              class="w-full rounded-[10px] bg-paper"
-              style={`height:${CALENDAR_HEIGHT}px`}
-              loading="lazy"
-            />
-          ) : (
-            <div class="flex min-h-80 flex-col items-center justify-center rounded-[10px] border border-dashed border-line/40 px-6 py-16 text-center">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <rect
-                  x="3"
-                  y="5"
-                  width="18"
-                  height="16"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                  class="text-line"
-                />
-                <path
-                  d="M3 10h18M8 3v4M16 3v4"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                  class="text-line"
-                />
-              </svg>
-              <p class="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-line">
-                Espacio reservado para el calendario
-              </p>
-              <p class="mt-3 max-w-md text-sm leading-relaxed text-line">
-                Pegá la URL de embed de HubSpot Meetings, Calendly o Cal.com en{' '}
-                <code class="text-paper">CALENDAR_EMBED_URL</code>, dentro de{' '}
-                <code class="text-paper">src/site.config.ts</code>.
-              </p>
-              <p class="mt-8 text-sm text-line">
-                Mientras tanto, escribile directo a{' '}
-                <a
-                  href={`mailto:${CONTACT.email}`}
-                  class="text-paper underline decoration-line underline-offset-4"
-                >
-                  {CONTACT.email}
-                </a>
-              </p>
-            </div>
-          )
-        }
+{/* Contenedor a todo el ancho con el mismo margen y radio que el del hero. Va en
+    blanco para que empalme con el iframe del calendario, que también es blanco. */}
+<section id="agenda" style={`padding:0 ${PAGE_INSET}px`}>
+  <div class="bg-paper" style={`border-radius:${PAGE_RADIUS}px`}>
+    <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
+      <div class="max-w-3xl">
+        <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
+          Treinta minutos para ver si esto aplica a tu caso
+        </h2>
+        <p class="mt-6 text-lg leading-relaxed text-muted">
+          Elegí un horario y charlamos. Vamos a mirar a qué cuentas querés llegar, cómo se está
+          vendiendo hoy y si el sistema tiene sentido para vos. Si no lo tiene, te lo decimos en esa
+          misma reunión.
+        </p>
       </div>
 
-      <div>
-        <h3 class="text-sm font-semibold uppercase tracking-[0.14em] text-line">
-          Qué necesitamos de vos
-        </h3>
-        <dl class="mt-7 space-y-7">
+      <div class="mt-14 grid gap-12 lg:grid-cols-[1fr_20rem] lg:gap-16">
+        <div>
           {
-            requisitos.map((r) => (
-              <div class="border-t border-line/30 pt-6">
-                <dt class="text-base font-semibold">{r.titulo}</dt>
-                <dd class="mt-2 text-sm leading-relaxed text-line">{r.texto}</dd>
+            CALENDAR_EMBED_URL ? (
+              <iframe
+                src={CALENDAR_EMBED_URL}
+                title="Calendario para agendar una reunión con Studio MRB"
+                class="w-full rounded-[10px] bg-paper"
+                style={`height:${CALENDAR_HEIGHT}px`}
+                loading="lazy"
+              />
+            ) : (
+              <div class="flex min-h-80 flex-col items-center justify-center rounded-[10px] border border-dashed border-line bg-paper px-6 py-16 text-center">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                  class="text-line"
+                >
+                  <rect x="3" y="5" width="18" height="16" stroke="currentColor" stroke-width="1.4" />
+                  <path d="M3 10h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="1.4" />
+                </svg>
+                <p class="mt-6 text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+                  Espacio reservado para el calendario
+                </p>
+                <p class="mt-3 max-w-md text-sm leading-relaxed text-muted">
+                  Pegá la URL de embed del calendario en{' '}
+                  <code class="text-ink">CALENDAR_EMBED_URL</code>, dentro de{' '}
+                  <code class="text-ink">src/site.config.ts</code>.
+                </p>
+                <p class="mt-8 text-sm text-muted">
+                  Mientras tanto, escribile directo a{' '}
+                  <a
+                    href={`mailto:${CONTACT.email}`}
+                    class="text-ink underline decoration-line underline-offset-4"
+                  >
+                    {CONTACT.email}
+                  </a>
+                </p>
               </div>
-            ))
+            )
           }
-        </dl>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-semibold uppercase tracking-[0.14em] text-accent">
+            Qué necesitamos de vos
+          </h3>
+          <dl class="mt-7 space-y-7">
+            {
+              requisitos.map((r) => (
+                <div class="border-t border-line pt-6">
+                  <dt class="text-base font-semibold">{r.titulo}</dt>
+                  <dd class="mt-2 text-sm leading-relaxed text-muted">{r.texto}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
       </div>
     </div>
   </div>

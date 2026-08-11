@@ -4,9 +4,8 @@ import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 
 // Cifras estructurales del programa, tomadas de la propuesta de trabajo.
 const marcas = [
-  { valor: 'Día 20', detalle: 'el sistema ya está ejecutando' },
-  { valor: '2 meses', detalle: 'de piloto sobre un mercado acotado' },
-  { valor: '3 canales', detalle: 'mail, LinkedIn y llamadas' },
+  { valor: 'Día 10', detalle: 'el sistema ya está funcionando' },
+  { valor: '15 a 30 días', detalle: 'para las primeras reuniones' },
 ];
 ---
 
@@ -46,11 +45,11 @@ const marcas = [
         <span class="text-sm text-line">Reunión de 30 minutos, sin costo</span>
       </div>
 
-      <dl class="mt-16 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+      <dl class="mt-16 grid max-w-lg grid-cols-1 gap-4 sm:grid-cols-2">
         {
           marcas.map((m) => (
             <div class="rounded-[10px] border border-white/15 bg-white/5 p-6 backdrop-blur-sm">
-              <dt class="text-2xl font-bold tracking-tight">{m.valor}</dt>
+              <dt class="text-2xl font-normal tracking-tight">{m.valor}</dt>
               <dd class="mt-2 text-sm leading-relaxed text-line">{m.detalle}</dd>
             </div>
           ))
