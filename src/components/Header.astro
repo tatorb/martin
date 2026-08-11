@@ -11,18 +11,15 @@ const contentInset = `calc(${STRIP_PCT}% + ${CAP_W}px)`;
 const BAR_PAD = 15;
 ---
 
-{/* Fijo, como en el sitio institucional. Lleva el mismo margen lateral que el
-    contenedor del hero para que la silueta quede contenida dentro del bloque.
-    La sombra apenas insinuada es lo que la separa de las secciones claras, donde
-    la silueta blanca no tendría contra qué recortarse. */}
+{/* Fijo, como en el sitio institucional, con el mismo margen lateral que los
+    contenedores de la página para que la silueta quede alineada con ellos. */}
 <header
-  class="fixed inset-x-0 top-0 z-50 drop-shadow-[0_1px_3px_rgba(0,0,0,0.10)]"
+  class="fixed inset-x-0 top-0 z-50"
   style={`height:${BLOCK_H}px;padding:0 ${PAGE_INSET}px`}
 >
-  {/* Sin recorte de esquinas. El header es fijo y el contenedor del hero no, así
-      que apenas se scrollea su esquina redondeada se va de vista y el borde pasa a
-      ser recto. Un recorte fijo dejaba ahí una cuña. Arriba de todo no hace falta,
-      la tira es blanca sobre el fondo blanco de la página y no se distingue. */}
+    {/* El redondeo de los extremos va en las tiras, no como recorte del bloque.
+      Con el radio en 10 entra holgado en los 20px de alto de la tira, así que ya
+      no se deforma como cuando el radio era 28. */}
   <div class="relative h-full">
     <HeaderShape />
 
