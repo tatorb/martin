@@ -13,7 +13,7 @@
  *   Vimeo    ->  https://player.vimeo.com/video/ID_DEL_VIDEO
  *   Loom     ->  https://www.loom.com/embed/ID_DEL_VIDEO
  */
-export const VSL_EMBED_URL = '';
+export const VSL_EMBED_URL = 'https://www.youtube-nocookie.com/embed/iod8tXkz-Rg';
 
 /**
  * Imagen de portada del video, opcional. Se muestra mientras el VSL no está cargado.

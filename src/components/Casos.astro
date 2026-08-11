@@ -57,7 +57,7 @@ const casos = [
   <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
     <div class="max-w-3xl">
       <p class="eyebrow">Casos de éxito</p>
-      <h2 class="mt-5 text-3xl font-bold uppercase leading-tight tracking-tight md:text-4xl">
+      <h2 class="mt-5 text-3xl font-bold leading-tight tracking-tight md:text-4xl">
         Cuentas que hoy prospectan con un sistema
       </h2>
       <p class="mt-6 text-lg leading-relaxed text-muted">
@@ -71,7 +71,7 @@ const casos = [
         casos.map((c) => (
           <article class="flex flex-col bg-paper px-7 py-9 md:px-9">
             <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-              <h3 class="text-xl font-bold uppercase tracking-tight">{c.cuenta}</h3>
+              <h3 class="text-xl font-bold tracking-tight">{c.cuenta}</h3>
               <span class="text-xs uppercase tracking-[0.14em] text-muted">{c.periodo}</span>
             </div>
             <p class="mt-1 text-sm uppercase tracking-[0.14em] text-accent">{c.industria}</p>
