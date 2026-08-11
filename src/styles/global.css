@@ -26,9 +26,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* El header ya no es fijo, se apoya sobre el hero, así que las anclas no
-       necesitan compensación. */
-    scroll-padding-top: 0;
+    /* Deja aire bajo el header fijo cuando un CTA ancla a #agenda. */
+    scroll-padding-top: 60px;
     -webkit-text-size-adjust: 100%;
   }
 
