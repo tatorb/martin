@@ -1,0 +1,115 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Cta from '../components/Cta.astro';
+import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from '../components/HeaderShape.astro';
+import { VSL_EMBED_URL, VSL_POSTER_URL } from '../site.config';
+
+// El póster no se usa acá. Esta página existe para ver el video, así que carga
+// directo en vez de esperar un clic.
+const tienePoster = Boolean(VSL_POSTER_URL);
+---
+
+<Base
+  title="Video | Apertura de Cuentas, Studio MRB"
+  description="El sistema de Apertura de Cuentas de Studio MRB, explicado en video."
+>
+  <Header ctaHref="/#agenda" homeHref="/" />
+
+  <main style={`padding:${BLOCK_H + 40}px ${PAGE_INSET}px 40px`}>
+    <div class="mx-auto w-full max-w-6xl">
+      <h1 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
+        ¿Cómo funciona?
+      </h1>
+
+      {
+        VSL_EMBED_URL ? (
+          <>
+            {/* El ancho máximo se deriva del alto libre, así el video entra
+                entero junto con el botón sin obligar a scrollear. */}
+            <div
+              id="marco"
+              class="mx-auto mt-8 aspect-video w-full overflow-hidden bg-ink"
+              style={`border-radius:${PAGE_RADIUS}px;max-width:calc((100vh - 280px) * 16 / 9)`}
+            >
+              <iframe
+                src={VSL_EMBED_URL}
+                title="Apertura de Cuentas, Studio MRB"
+                class="h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+
+            <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+              <button
+                id="agrandar"
+                type="button"
+                class="inline-flex items-center justify-center gap-2.5 rounded-md bg-ink px-8 py-3.5 text-base font-medium text-paper shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)] transition-colors duration-200 hover:bg-accent"
+              >
+                Ver en pantalla completa
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6"
+                    stroke="currentColor"
+                    stroke-width="1.7"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+
+              <Cta label="Agendar" href="/#agenda" variant="outline" />
+            </div>
+          </>
+        ) : (
+          <div
+            class="mt-8 flex aspect-video w-full flex-col items-center justify-center border border-dashed border-line bg-mist px-6 text-center"
+            style={`border-radius:${PAGE_RADIUS}px`}
+          >
+            <p class="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+              Espacio reservado para el VSL
+            </p>
+            <p class="mt-3 max-w-md text-sm leading-relaxed text-muted">
+              Pegá la URL de embed del video en <code class="text-ink">VSL_EMBED_URL</code>, dentro
+              de <code class="text-ink">src/site.config.ts</code>.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+</Base>
+
+<style>
+  /* En pantalla completa el marco ocupa todo y pierde el radio. Sin esto el
+     contenedor conserva su relación de aspecto y queda una franja negra. */
+  #marco:fullscreen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    aspect-ratio: auto;
+  }
+  #marco:-webkit-full-screen {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    aspect-ratio: auto;
+  }
+</style>
+
+<script>
+  const marco = document.getElementById('marco');
+  const boton = document.getElementById('agrandar');
+
+  // Safari en iPhone no expone requestFullscreen sobre un div. Ahí no queda otra
+  // que el control propio del reproductor, así que escondemos el botón.
+  const puede = marco && (marco.requestFullscreen || (marco as any).webkitRequestFullscreen);
+  if (!puede && boton) boton.hidden = true;
+
+  boton?.addEventListener('click', () => {
+    if (!marco) return;
+    if (marco.requestFullscreen) marco.requestFullscreen();
+    else (marco as any).webkitRequestFullscreen?.();
+  });
+</script>

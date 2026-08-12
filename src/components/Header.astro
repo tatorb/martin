@@ -9,6 +9,15 @@ const contentInset = `calc(${STRIP_PCT}% + ${CAP_W}px)`;
 
 // Padding interno de la barra en el sitio institucional.
 const BAR_PAD = 15;
+
+interface Props {
+  /** Fuera de la home el botón tiene que volver a ella. */
+  ctaHref?: string;
+  /** Ídem el logo. */
+  homeHref?: string;
+}
+
+const { ctaHref = '#agenda', homeHref = '#contenido' } = Astro.props;
 ---
 
 {/* Fijo, como en el sitio institucional, con el mismo margen lateral que los
@@ -28,13 +37,13 @@ const BAR_PAD = 15;
       class="relative flex h-full items-center justify-between gap-4"
       style={`margin:0 ${contentInset};padding:0 ${BAR_PAD}px`}
     >
-      <a href="#contenido" class="text-ink" aria-label="Studio MRB, inicio">
+      <a href={homeHref} class="text-ink" aria-label="Studio MRB, inicio">
         {/* 20px, la proporción que tiene contra el botón de 35px en el original.
             Va como clase literal porque Tailwind no detecta clases construidas. */}
         <Logo class="h-5" />
       </a>
 
-      <Cta label="Agendar" size="sm" icon={false} />
+      <Cta label="Agendar" size="sm" icon={false} href={ctaHref} />
     </div>
   </div>
 </header>

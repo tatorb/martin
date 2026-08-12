@@ -6,6 +6,8 @@ interface Props {
   size?: 'sm' | 'md';
   /** La flecha va en los botones del cuerpo. El del header no la lleva. */
   icon?: boolean;
+  /** Fuera de la home hay que salir de la página, por eso es configurable. */
+  href?: string;
   class?: string;
 }
 
@@ -14,6 +16,7 @@ const {
   variant = 'solid',
   size = 'md',
   icon = true,
+  href = '#agenda',
   class: extra = '',
 } = Astro.props;
 
@@ -37,7 +40,7 @@ const styles = {
 };
 ---
 
-<a href="#agenda" class:list={[base, sizes[size], styles[variant], extra]}>
+<a href={href} class:list={[base, sizes[size], styles[variant], extra]}>
   {label}
   {
     icon && (
