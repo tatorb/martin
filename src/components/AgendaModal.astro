@@ -1,0 +1,89 @@
+---
+import { CALENDAR_EMBED_URL, CONTACT } from '../site.config';
+import { PAGE_RADIUS } from './HeaderShape.astro';
+
+// El calendario se abre en un diálogo en vez de mandar al visitante a otra
+// sección. Se usa el elemento dialog nativo, que ya trae cierre con Escape,
+// foco atrapado dentro y fondo inerte, sin librerías.
+---
+
+<dialog
+  id="modal-agenda"
+  aria-label="Agendar una reunión"
+  {/* El m-auto es necesario. El preflight de Tailwind pone margin 0 en todo y eso
+      pisa el margin auto con el que el navegador centra un dialog modal. */}
+  class="m-auto w-[min(1000px,94vw)] border-0 bg-transparent p-0 backdrop:bg-black/60"
+>
+  <div
+    class="relative overflow-hidden bg-paper"
+    style={`border-radius:${PAGE_RADIUS}px;height:min(920px, 88vh)`}
+  >
+    <button
+      type="button"
+      data-cerrar
+      aria-label="Cerrar"
+      class="absolute right-3 top-3 z-10 flex h-9 w-9 items-center justify-center rounded-md bg-paper text-ink transition-colors hover:bg-mist"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.7" />
+      </svg>
+    </button>
+
+    {
+      CALENDAR_EMBED_URL ? (
+        // El iframe se inyecta al abrir por primera vez. Si se dejara acá, el
+        // calendario se descargaría en cada visita aunque nadie lo abra.
+        <div id="modal-agenda-marco" class="h-full w-full" data-src={CALENDAR_EMBED_URL} />
+      ) : (
+        <div class="flex h-full flex-col items-center justify-center px-6 text-center">
+          <p class="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+            Falta cargar el calendario
+          </p>
+          <p class="mt-4 text-sm text-muted">
+            Escribile directo a{' '}
+            <a
+              href={`mailto:${CONTACT.email}`}
+              class="text-ink underline decoration-line underline-offset-4"
+            >
+              {CONTACT.email}
+            </a>
+          </p>
+        </div>
+      )
+    }
+  </div>
+</dialog>
+
+<script>
+  const modal = document.getElementById('modal-agenda') as HTMLDialogElement | null;
+  const marco = document.getElementById('modal-agenda-marco');
+
+  function abrir(evento: Event) {
+    if (!modal) return; // sin diálogo, el enlace hace lo suyo y lleva a la sección
+    evento.preventDefault();
+
+    // Carga diferida, una sola vez.
+    if (marco && !marco.querySelector('iframe')) {
+      const iframe = document.createElement('iframe');
+      iframe.src = marco.dataset.src ?? '';
+      iframe.title = 'Calendario para agendar una reunión con Studio MRB';
+      iframe.className = 'h-full w-full';
+      marco.appendChild(iframe);
+    }
+
+    modal.showModal();
+  }
+
+  // Todo enlace que apunte al ancla de agenda, esté en la home o en otra página.
+  document.querySelectorAll<HTMLAnchorElement>('a[href$="#agenda"]').forEach((enlace) => {
+    enlace.addEventListener('click', abrir);
+  });
+
+  modal?.querySelector('[data-cerrar]')?.addEventListener('click', () => modal.close());
+
+  // Clic en el fondo. El dialog recibe el evento cuando se toca el backdrop,
+  // porque el contenido está en un hijo que lo cubre por completo.
+  modal?.addEventListener('click', (evento) => {
+    if (evento.target === modal) modal.close();
+  });
+</script>

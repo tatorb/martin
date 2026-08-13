@@ -3,11 +3,13 @@ import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import Cta from '../components/Cta.astro';
 import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from '../components/HeaderShape.astro';
+import AgendaModal from '../components/AgendaModal.astro';
 import { VSL_EMBED_URL, VSL_POSTER_URL } from '../site.config';
+import { urlDeEmbed } from '../lib/video';
 
 // El póster no se usa acá. Esta página existe para ver el video, así que carga
 // directo en vez de esperar un clic.
-const tienePoster = Boolean(VSL_POSTER_URL);
+const embed = urlDeEmbed(VSL_EMBED_URL);
 ---
 
 <Base
@@ -33,7 +35,7 @@ const tienePoster = Boolean(VSL_POSTER_URL);
               style={`border-radius:${PAGE_RADIUS}px;max-width:calc((100vh - 280px) * 16 / 9)`}
             >
               <iframe
-                src={VSL_EMBED_URL}
+                src={embed}
                 title="Apertura de Cuentas, Studio MRB"
                 class="h-full w-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
@@ -79,6 +81,8 @@ const tienePoster = Boolean(VSL_POSTER_URL);
       }
     </div>
   </main>
+
+  <AgendaModal />
 </Base>
 
 <style>

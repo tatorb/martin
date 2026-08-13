@@ -2,6 +2,7 @@
 import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 import Cta from './Cta.astro';
 import { VSL_EMBED_URL, VSL_POSTER_URL } from '../site.config';
+import { urlDeEmbed } from '../lib/video';
 
 const apoyos = [
   {
@@ -24,6 +25,7 @@ const apoyos = [
 // Cuando hay póster mostramos una fachada y cargamos el iframe recién al hacer clic,
 // así la página no arranca pidiendo el video.
 const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
+const embed = urlDeEmbed(VSL_EMBED_URL);
 ---
 
 <section style={`padding:0 ${PAGE_INSET}px`}>
@@ -42,7 +44,7 @@ const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
             <div
               id="vsl"
               class="relative aspect-video w-full overflow-hidden rounded-[10px] bg-ink"
-              data-embed={VSL_EMBED_URL}
+              data-embed={embed}
             >
               <img
                 src={VSL_POSTER_URL}
@@ -64,7 +66,7 @@ const usaFachada = Boolean(VSL_EMBED_URL && VSL_POSTER_URL);
           ) : (
             <div class="aspect-video w-full overflow-hidden rounded-[10px] bg-ink">
               <iframe
-                src={VSL_EMBED_URL}
+                src={embed}
                 title="Apertura de Cuentas, Studio MRB"
                 class="h-full w-full"
                 loading="lazy"
