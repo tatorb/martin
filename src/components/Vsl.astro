@@ -3,6 +3,7 @@ import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 import Cta from './Cta.astro';
 import { VSL_EMBED_URL, VSL_POSTER_URL } from '../site.config';
 import { urlDeEmbed } from '../lib/video';
+import SinSubtitulos from './SinSubtitulos.astro';
 
 const apoyos = [
   {
@@ -67,6 +68,7 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
             <div class="aspect-video w-full overflow-hidden rounded-[10px] bg-ink">
               <iframe
                 src={embed}
+                data-yt
                 title="Apertura de Cuentas, Studio MRB"
                 class="h-full w-full"
                 loading="lazy"
@@ -110,6 +112,8 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
   </div>
 </section>
 
+<SinSubtitulos />
+
 {
   usaFachada && (
     <script>
@@ -120,6 +124,7 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
         const iframe = document.createElement('iframe');
         iframe.src = src.includes('?') ? `${src}&autoplay=1` : `${src}?autoplay=1`;
         iframe.title = 'Apertura de Cuentas, Studio MRB';
+        iframe.dataset.yt = '';
         iframe.className = 'absolute inset-0 h-full w-full';
         iframe.allow =
           'accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture';

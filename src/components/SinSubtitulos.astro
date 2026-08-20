@@ -1,0 +1,56 @@
+---
+// Apaga los subtítulos automáticos de YouTube.
+//
+// El parámetro cc_load_policy=0 solo cubre los subtítulos que el que mira tenga
+// activados por preferencia. Los automáticos, los que YouTube genera solo, se
+// cargan igual y no hay parámetro de URL que los evite. La única vía es la API
+// del reproductor, descargando el módulo de subtítulos.
+//
+// Se llama dos veces, al estar listo el reproductor y de nuevo al empezar a
+// reproducir, porque el módulo puede volver a cargarse cuando arranca el video.
+---
+
+<script>
+  type Reproductor = {
+    unloadModule: (modulo: string) => void;
+    addEventListener: (evento: string, manejador: (e: { data: number }) => void) => void;
+  };
+
+  function apagar(reproductor: Reproductor) {
+    // captions es el módulo del reproductor viejo, cc el del HTML5. Llamar al
+    // que no corresponde no rompe nada, así que se piden los dos.
+    try {
+      reproductor.unloadModule('captions');
+      reproductor.unloadModule('cc');
+    } catch {
+      // el reproductor todavía no expone el módulo, no hay nada que hacer
+    }
+  }
+
+  function montar() {
+    const YT = (window as any).YT;
+    if (!YT?.Player) return;
+
+    document.querySelectorAll<HTMLIFrameElement>('iframe[data-yt]').forEach((iframe) => {
+      const reproductor: Reproductor = new YT.Player(iframe, {
+        events: {
+          onReady: () => apagar(reproductor),
+          onStateChange: (evento: { data: number }) => {
+            if (evento.data === YT.PlayerState.PLAYING) apagar(reproductor);
+          },
+        },
+      });
+    });
+  }
+
+  if (document.querySelector('iframe[data-yt]')) {
+    if ((window as any).YT?.Player) {
+      montar();
+    } else {
+      (window as any).onYouTubeIframeAPIReady = montar;
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(script);
+    }
+  }
+</script>

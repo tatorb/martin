@@ -6,6 +6,7 @@ import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from '../components/HeaderShape.astr
 import AgendaModal from '../components/AgendaModal.astro';
 import { VSL_EMBED_URL, VSL_POSTER_URL } from '../site.config';
 import { urlDeEmbed } from '../lib/video';
+import SinSubtitulos from '../components/SinSubtitulos.astro';
 
 // El póster no se usa acá. Esta página existe para ver el video, así que carga
 // directo en vez de esperar un clic.
@@ -36,6 +37,7 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
             >
               <iframe
                 src={embed}
+                data-yt
                 title="Apertura de Cuentas, Studio MRB"
                 class="h-full w-full"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
@@ -83,6 +85,7 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
   </main>
 
   <AgendaModal />
+  <SinSubtitulos />
 </Base>
 
 <style>
