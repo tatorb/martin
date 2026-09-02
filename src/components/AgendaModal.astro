@@ -58,7 +58,30 @@ import { PAGE_RADIUS } from './HeaderShape.astro';
   const modal = document.getElementById('modal-agenda') as HTMLDialogElement | null;
   const marco = document.getElementById('modal-agenda-marco');
 
-  function abrir(evento: Event) {
+  // Guarda en memoria. Vive lo que vive la pestaña, así que un mismo visitante
+  // que toque varios botones cuenta una sola vez. No se persiste a propósito.
+  let leadEnviado = false;
+
+  /**
+   * Evento Lead del píxel de Meta. No devuelve nada ni espera nada, fbq encola
+   * y sigue, así que el clic no se retrasa. El try es por si un bloqueador
+   * dejó fbq sin definir, para que eso no corte la apertura del calendario.
+   */
+  function registrarLead(enlace: HTMLAnchorElement) {
+    if (leadEnviado) return;
+    const fbq = (window as any).fbq;
+    if (typeof fbq !== 'function') return;
+    leadEnviado = true;
+    try {
+      fbq('track', 'Lead', { content_name: enlace.dataset.lead ?? 'boton_agenda' });
+    } catch {
+      /* el píxel no debe romper la navegación */
+    }
+  }
+
+  function abrir(this: HTMLAnchorElement, evento: Event) {
+    registrarLead(this);
+
     if (!modal) return; // sin diálogo, el enlace hace lo suyo y lleva a la sección
     evento.preventDefault();
 

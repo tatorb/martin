@@ -8,6 +8,8 @@ interface Props {
   icon?: boolean;
   /** Fuera de la home hay que salir de la página, por eso es configurable. */
   href?: string;
+  /** Nombre con el que este botón se identifica en el evento Lead del píxel. */
+  pixel?: string;
   class?: string;
 }
 
@@ -17,6 +19,7 @@ const {
   size = 'md',
   icon = true,
   href = '#agenda',
+  pixel,
   class: extra = '',
 } = Astro.props;
 
@@ -40,7 +43,7 @@ const styles = {
 };
 ---
 
-<a href={href} class:list={[base, sizes[size], styles[variant], extra]}>
+<a href={href} data-lead={pixel} class:list={[base, sizes[size], styles[variant], extra]}>
   {label}
   {
     icon && (
