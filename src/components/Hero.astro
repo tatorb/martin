@@ -6,6 +6,7 @@ import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 const marcas = [
   { valor: 'Día 10', detalle: 'el sistema ya está funcionando' },
   { valor: '15 a 30 días', detalle: 'para las primeras reuniones' },
+  { valor: 'Garantía', detalle: '15 reuniones en 90 días' },
 ];
 ---
 
@@ -33,19 +34,7 @@ const marcas = [
         Reuniones con los decisores<br class="hidden sm:block" /> de las cuentas que te importan
       </h1>
 
-      <p class="mt-8 max-w-2xl text-lg leading-relaxed text-line md:text-xl">
-        Tu equipo comercial cierra y cuida relaciones. Nosotros abrimos las conversaciones que
-        todavía no existen, con las empresas que elegiste y con la persona que decide, sin depender
-        de referidos ni de los clientes de siempre.
-      </p>
-
-      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
-        {/* Mismas dimensiones que el del header. */}
-        <Cta variant="light" size="sm" pixel="boton_hero" />
-        <span class="text-sm text-line">Reunión de 30 minutos, sin costo</span>
-      </div>
-
-      <dl class="mt-16 grid max-w-lg grid-cols-1 gap-4 sm:grid-cols-2">
+      <dl class="mt-12 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
         {
           marcas.map((m) => (
             <div class="rounded-[10px] border border-white/15 bg-white/5 p-6 backdrop-blur-sm">
@@ -56,10 +45,11 @@ const marcas = [
         }
       </dl>
 
-      <p class="mt-10 max-w-2xl text-sm leading-relaxed text-line">
-        Operamos sistemas de prospección para servicios IT, fintech, tecnologías inmersivas y
-        desarrollo inmobiliario, en Argentina, México, Paraguay y Colombia.
-      </p>
+      <div class="mt-10 flex flex-col gap-4 sm:flex-row sm:items-center">
+        {/* Mismas dimensiones que el del header. */}
+        <Cta variant="light" size="sm" pixel="boton_hero" />
+        <span class="text-sm text-line">Reunión de 30 minutos, sin costo</span>
+      </div>
     </div>
   </div>
 </section>
