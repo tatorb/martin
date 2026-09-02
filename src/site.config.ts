@@ -30,7 +30,7 @@ export const VSL_POSTER_URL = '';
  *   Cal.com          ->  https://cal.com/USUARIO/reunion
  */
 export const CALENDAR_EMBED_URL =
-  'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3Sa-itWHrP7z9wAibQag7-J1pJbUFqcUEKdO01XhpVzICg465f75ScKFBmBc51npBnLJZ3iFoE?gv=true';
+  'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3j8YnCOwIEJfKZSVPEpJ83figEEplUbkSf7Ku2rDUrbKyhFs3BBD-XUnyRkoHq-56cRQ8APCcs?gv=true';
 
 /** Alto del iframe del calendario en píxeles. Subilo si el widget queda cortado. */
 export const CALENDAR_HEIGHT = 980;
