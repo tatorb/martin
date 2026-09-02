@@ -95,9 +95,6 @@ import { PAGE_RADIUS } from './HeaderShape.astro';
     }
 
     modal.showModal();
-
-    // DIAGNÓSTICO TEMPORAL, BORRAR DESPUÉS. Ver el bloque del final del archivo.
-    escucharMensajes();
   }
 
   // Todo enlace que apunte al ancla de agenda, esté en la home o en otra página.
@@ -112,60 +109,4 @@ import { PAGE_RADIUS } from './HeaderShape.astro';
   modal?.addEventListener('click', (evento) => {
     if (evento.target === modal) modal.close();
   });
-
-  // ===========================================================================
-  // DIAGNÓSTICO TEMPORAL, BORRAR DESPUÉS.
-  //
-  // Sirve para averiguar si el widget de citas de Google avisa algo a la página
-  // cuando alguien confirma una reserva. Escucha todos los postMessage que
-  // lleguen a la ventana mientras el modal está abierto, sin filtrar ninguno,
-  // y los muestra en la consola.
-  //
-  // Para sacarlo: borrar este bloque entero y la llamada a escucharMensajes()
-  // que está dentro de la función abrir().
-  // ===========================================================================
-  const registro: unknown[] = [];
-  (window as any).mensajesAgenda = registro;
-  let escuchando = false;
-
-  function espiar(evento: MessageEvent) {
-    const entrada = {
-      hora: new Date().toISOString(),
-      origen: evento.origin,
-      datos: evento.data,
-      tipoDeDatos: typeof evento.data,
-      vieneDelIframe: evento.source === marco?.querySelector('iframe')?.contentWindow,
-    };
-    registro.push(entrada);
-
-    console.log('%c[AGENDA] mensaje ' + registro.length, 'background:#5b7382;color:#fff;padding:2px 6px');
-    console.log('  origen:', evento.origin);
-    console.log('  datos:', evento.data);
-    // Si el contenido es un objeto, esta copia en texto es la más fácil de pegar.
-    try {
-      console.log('  datos como texto:', JSON.stringify(evento.data));
-    } catch {
-      console.log('  datos como texto: (no se puede convertir)');
-    }
-  }
-
-  function escucharMensajes() {
-    if (escuchando) return;
-    escuchando = true;
-    window.addEventListener('message', espiar);
-    console.log(
-      '%c[AGENDA] escuchando mensajes del calendario. Al terminar, escribí: copy(mensajesAgenda)',
-      'background:#000;color:#fff;padding:2px 6px'
-    );
-  }
-
-  // Deja de escuchar al cerrar, como pediste. El registro queda igual en
-  // window.mensajesAgenda, así que no se pierde nada de lo ya capturado.
-  modal?.addEventListener('close', () => {
-    window.removeEventListener('message', espiar);
-    escuchando = false;
-    console.log('%c[AGENDA] modal cerrado. Mensajes capturados: ' + registro.length,
-      'background:#000;color:#fff;padding:2px 6px');
-  });
-  // ======================= FIN DEL DIAGNÓSTICO TEMPORAL ======================
 </script>
