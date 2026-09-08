@@ -12,13 +12,17 @@
 //    reproducir, porque el módulo puede volver a cargarse cuando arranca el
 //    video.
 //
-// 2. Activa el sonido cuando el visitante lo pide.
+// 2. Enciende el sonido lo antes posible.
 //
 //    El video arranca solo, y para eso tiene que arrancar en silencio: ningún
 //    navegador deja reproducir con sonido sin que la persona haya interactuado
-//    con la página. Así que se muestra un botón encima del video, y recién al
-//    tocarlo se enciende el audio. El botón vive en el marco del video, con el
-//    atributo data-sonido.
+//    con la página. No hay parámetro ni truco que lo evite.
+//
+//    Lo que sí se puede es no hacerla buscar el botón: el audio se enciende al
+//    primer clic, toque o tecla en cualquier parte de la página, siempre que el
+//    video esté a la vista. El botón queda igual, para quien quiera encenderlo
+//    a propósito y para que se entienda por qué no hay sonido todavía. Vive en
+//    el marco del video, con el atributo data-sonido.
 ---
 
 <script>
@@ -47,11 +51,15 @@
   function conectarSonido(iframe: HTMLIFrameElement, reproductor: Reproductor) {
     const marco = iframe.closest('[data-marco-video]');
     const boton = marco?.querySelector<HTMLButtonElement>('[data-sonido]');
-    if (!boton) return;
+    if (!marco) return;
 
-    boton.hidden = false;
+    if (boton) boton.hidden = false;
 
-    boton.addEventListener('click', () => {
+    let sonando = false;
+
+    function encender() {
+      if (sonando) return;
+      sonando = true;
       try {
         reproductor.unMute();
         // Si el navegador llegó a frenar la reproducción, esto la retoma.
@@ -59,8 +67,49 @@
       } catch {
         // sin API no hay nada que hacer, quedan los controles de YouTube
       }
-      boton.hidden = true;
-    });
+      if (boton) boton.hidden = true;
+    }
+
+    boton?.addEventListener('click', encender);
+
+    // Se sabe si el video está a la vista, para no encender el sonido de un
+    // video que quedó lejos, arriba o abajo de donde está mirando la persona.
+    let aLaVista = true;
+    if ('IntersectionObserver' in window) {
+      aLaVista = false;
+      new IntersectionObserver(
+        (entradas) => {
+          aLaVista = entradas.some((e) => e.isIntersecting);
+        },
+        { threshold: 0.5 }
+      ).observe(marco);
+    }
+
+    /**
+     * El sonido se enciende solo en cuanto la persona toca cualquier parte de
+     * la página.
+     *
+     * Es lo más cerca que se puede estar de arrancar con sonido: el navegador
+     * exige un gesto previo, pero ese gesto no tiene por qué ser el botón. Un
+     * clic en cualquier lado alcanza, y así la mayoría escucha el video sin
+     * tener que buscar nada.
+     *
+     * Se ignoran los clics sobre enlaces y botones, porque quien va a agendar
+     * o a navegar no espera que en ese momento aparezca audio.
+     */
+    function alPrimerGesto(evento: Event) {
+      if (!aLaVista) return;
+
+      const destino = evento.target as Element | null;
+      const interactivo = destino?.closest?.('a, button, input, select, textarea, [role="button"]');
+      if (interactivo && interactivo !== boton) return;
+
+      encender();
+    }
+
+    for (const tipo of ['pointerdown', 'keydown', 'touchstart']) {
+      document.addEventListener(tipo, alPrimerGesto, { passive: true });
+    }
   }
 
   function montar() {
