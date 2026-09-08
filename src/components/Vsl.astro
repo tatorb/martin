@@ -3,7 +3,7 @@ import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 import Cta from './Cta.astro';
 import { VSL_EMBED_URL, VSL_POSTER_URL } from '../site.config';
 import { urlDeEmbed } from '../lib/video';
-import SinSubtitulos from './SinSubtitulos.astro';
+import Reproductor from './Reproductor.astro';
 
 const apoyos = [
   {
@@ -65,16 +65,33 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
               </button>
             </div>
           ) : (
-            <div class="aspect-video w-full overflow-hidden rounded-[10px] bg-ink">
+            <div
+              class="relative aspect-video w-full overflow-hidden rounded-[10px] bg-ink"
+              data-marco-video
+            >
               <iframe
                 src={embed}
                 data-yt
                 title="Apertura de Cuentas, Studio MRB"
                 class="h-full w-full"
-                loading="lazy"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
                 allowfullscreen
               />
+
+              {/* El video arranca solo y en silencio, que es lo único que
+                  permiten los navegadores. Este botón enciende el audio. */}
+              <button
+                type="button"
+                data-sonido
+                hidden
+                class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-md bg-paper/95 px-4 py-2.5 text-sm font-medium text-ink shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)] backdrop-blur-sm transition-colors hover:bg-paper"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M11 5L6 9H3v6h3l5 4V5z" />
+                  <path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" />
+                </svg>
+                Activar sonido
+              </button>
             </div>
           )
         ) : (
@@ -112,7 +129,7 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
   </div>
 </section>
 
-<SinSubtitulos />
+<Reproductor />
 
 {
   usaFachada && (

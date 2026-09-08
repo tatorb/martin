@@ -6,7 +6,7 @@ import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from '../components/HeaderShape.astr
 import AgendaModal from '../components/AgendaModal.astro';
 import { VSL_EMBED_URL, VSL_POSTER_URL } from '../site.config';
 import { urlDeEmbed } from '../lib/video';
-import SinSubtitulos from '../components/SinSubtitulos.astro';
+import Reproductor from '../components/Reproductor.astro';
 
 // El póster no se usa acá. Esta página existe para ver el video, así que carga
 // directo en vez de esperar un clic.
@@ -32,8 +32,9 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
                 entero junto con el botón sin obligar a scrollear. */}
             <div
               id="marco"
-              class="mx-auto mt-8 aspect-video w-full overflow-hidden bg-ink"
-              style={`border-radius:${PAGE_RADIUS}px;max-width:calc((100vh - 280px) * 16 / 9)`}
+              class="relative mx-auto mt-8 aspect-video w-full overflow-hidden bg-ink"
+              style={`border-radius:${PAGE_RADIUS}px;max-width:calc((100vh - 260px) * 16 / 9)`}
+              data-marco-video
             >
               <iframe
                 src={embed}
@@ -43,27 +44,25 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
                 allowfullscreen
               />
+
+              {/* El video arranca solo y en silencio, que es lo único que
+                  permiten los navegadores. Este botón enciende el audio. */}
+              <button
+                type="button"
+                data-sonido
+                hidden
+                class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-md bg-paper/95 px-4 py-2.5 text-sm font-medium text-ink shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)] backdrop-blur-sm transition-colors hover:bg-paper"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M11 5L6 9H3v6h3l5 4V5z" />
+                  <path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" />
+                </svg>
+                Activar sonido
+              </button>
             </div>
 
-            <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
-              <button
-                id="agrandar"
-                type="button"
-                class="inline-flex items-center justify-center gap-2.5 rounded-md bg-ink px-8 py-3.5 text-base font-medium text-paper shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)] transition-colors duration-200 hover:bg-accent"
-              >
-                Ver en pantalla completa
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path
-                    d="M9 3H3v6M15 3h6v6M9 21H3v-6M15 21h6v-6"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </button>
-
-              <Cta label="Agendar" href="/#agenda" variant="outline" pixel="boton_pagina_video" />
+            <div class="mt-8 flex justify-center">
+              <Cta label="Agendar" href="/#agenda" pixel="boton_pagina_video" />
             </div>
           </>
         ) : (
@@ -85,38 +84,5 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
   </main>
 
   <AgendaModal />
-  <SinSubtitulos />
+  <Reproductor />
 </Base>
-
-<style>
-  /* En pantalla completa el marco ocupa todo y pierde el radio. Sin esto el
-     contenedor conserva su relación de aspecto y queda una franja negra. */
-  #marco:fullscreen {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-    aspect-ratio: auto;
-  }
-  #marco:-webkit-full-screen {
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
-    aspect-ratio: auto;
-  }
-</style>
-
-<script>
-  const marco = document.getElementById('marco');
-  const boton = document.getElementById('agrandar');
-
-  // Safari en iPhone no expone requestFullscreen sobre un div. Ahí no queda otra
-  // que el control propio del reproductor, así que escondemos el botón.
-  const puede = marco && (marco.requestFullscreen || (marco as any).webkitRequestFullscreen);
-  if (!puede && boton) boton.hidden = true;
-
-  boton?.addEventListener('click', () => {
-    if (!marco) return;
-    if (marco.requestFullscreen) marco.requestFullscreen();
-    else (marco as any).webkitRequestFullscreen?.();
-  });
-</script>

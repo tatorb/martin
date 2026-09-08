@@ -1,0 +1,95 @@
+---
+// Ajustes del reproductor de YouTube, para todos los iframes con data-yt.
+//
+// 1. Apaga los subtítulos automáticos.
+//
+//    El parámetro cc_load_policy=0 solo cubre los subtítulos que el que mira
+//    tenga activados por preferencia. Los automáticos, los que YouTube genera
+//    solo, se cargan igual y no hay parámetro de URL que los evite. La única
+//    vía es la API del reproductor, descargando el módulo de subtítulos.
+//
+//    Se llama dos veces, al estar listo el reproductor y de nuevo al empezar a
+//    reproducir, porque el módulo puede volver a cargarse cuando arranca el
+//    video.
+//
+// 2. Activa el sonido cuando el visitante lo pide.
+//
+//    El video arranca solo, y para eso tiene que arrancar en silencio: ningún
+//    navegador deja reproducir con sonido sin que la persona haya interactuado
+//    con la página. Así que se muestra un botón encima del video, y recién al
+//    tocarlo se enciende el audio. El botón vive en el marco del video, con el
+//    atributo data-sonido.
+---
+
+<script>
+  type Reproductor = {
+    unloadModule: (modulo: string) => void;
+    unMute: () => void;
+    playVideo: () => void;
+    addEventListener: (evento: string, manejador: (e: { data: number }) => void) => void;
+  };
+
+  function apagarSubtitulos(reproductor: Reproductor) {
+    // captions es el módulo del reproductor viejo, cc el del HTML5. Llamar al
+    // que no corresponde no rompe nada, así que se piden los dos.
+    try {
+      reproductor.unloadModule('captions');
+      reproductor.unloadModule('cc');
+    } catch {
+      // el reproductor todavía no expone el módulo, no hay nada que hacer
+    }
+  }
+
+  /**
+   * Conecta el botón de sonido que acompaña a este iframe, si es que lo tiene.
+   * El botón se busca dentro del mismo marco, así cada video enciende el suyo.
+   */
+  function conectarSonido(iframe: HTMLIFrameElement, reproductor: Reproductor) {
+    const marco = iframe.closest('[data-marco-video]');
+    const boton = marco?.querySelector<HTMLButtonElement>('[data-sonido]');
+    if (!boton) return;
+
+    boton.hidden = false;
+
+    boton.addEventListener('click', () => {
+      try {
+        reproductor.unMute();
+        // Si el navegador llegó a frenar la reproducción, esto la retoma.
+        reproductor.playVideo();
+      } catch {
+        // sin API no hay nada que hacer, quedan los controles de YouTube
+      }
+      boton.hidden = true;
+    });
+  }
+
+  function montar() {
+    const YT = (window as any).YT;
+    if (!YT?.Player) return;
+
+    document.querySelectorAll<HTMLIFrameElement>('iframe[data-yt]').forEach((iframe) => {
+      const reproductor: Reproductor = new YT.Player(iframe, {
+        events: {
+          onReady: () => {
+            apagarSubtitulos(reproductor);
+            conectarSonido(iframe, reproductor);
+          },
+          onStateChange: (evento: { data: number }) => {
+            if (evento.data === YT.PlayerState.PLAYING) apagarSubtitulos(reproductor);
+          },
+        },
+      });
+    });
+  }
+
+  if (document.querySelector('iframe[data-yt]')) {
+    if ((window as any).YT?.Player) {
+      montar();
+    } else {
+      (window as any).onYouTubeIframeAPIReady = montar;
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      document.head.appendChild(script);
+    }
+  }
+</script>
