@@ -50,10 +50,14 @@ const marcas = [
       class="relative mx-auto max-w-6xl px-6 pb-24 md:pb-32"
       style={`padding-top:${BLOCK_H + 72}px`}
     >
+      {/* Este título es largo, así que va bastante más chico que un título de
+          pocas palabras y sin corte de línea forzado: con este largo, un salto
+          fijo se rompe en cuanto cambia el ancho de la pantalla. */}
       <h1
-        class="max-w-4xl text-4xl font-normal leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+        class="max-w-3xl text-[28px] font-normal leading-[1.14] tracking-tight sm:text-4xl md:text-5xl"
       >
-        Reuniones con los decisores<br class="hidden sm:block" /> de las empresas que te importan
+        10 reuniones por mes con leads calificados para Directores Comerciales de empresas con
+        modelo B2B y ventas consultivas
       </h1>
 
       <dl class="mt-12 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
