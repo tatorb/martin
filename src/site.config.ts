@@ -56,3 +56,12 @@ export const SEO = {
     'sin depender de referidos. Studio MRB opera el sistema completo por vos.',
   ogImage: '/og.png',
 } as const;
+
+/**
+ * Foto de fondo del hero, debajo del degradé oscuro.
+ *
+ * Alcanza con dejar el archivo en public/ llamado "hero", con cualquiera de
+ * estas extensiones. Se usa la primera que exista, en este orden. Si no hay
+ * ninguna, el hero muestra sólo el degradé.
+ */
+export const HERO_BG_CANDIDATOS = ['/hero.webp', '/hero.jpg', '/hero.jpeg', '/hero.png'];

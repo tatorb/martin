@@ -1,6 +1,12 @@
 ---
+import fs from 'node:fs';
 import Cta from './Cta.astro';
 import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
+import { HERO_BG_CANDIDATOS } from '../site.config';
+
+// La foto de fondo se usa sólo si el archivo existe. Así, mientras no esté
+// subida, el hero muestra el degradé de siempre en vez de una imagen rota.
+const foto = HERO_BG_CANDIDATOS.find((ruta) => fs.existsSync(`public${ruta}`));
 
 // Cifras estructurales del programa, tomadas de la propuesta de trabajo.
 const marcas = [
@@ -17,8 +23,24 @@ const marcas = [
     class="relative isolate overflow-hidden text-paper"
     style={`border-radius:${PAGE_RADIUS}px`}
   >
-    <!-- Degradé oscuro y tres manchas que derivan por encima. -->
-    <div aria-hidden="true" class="aurora pointer-events-none absolute inset-0">
+    <!-- Foto de fondo, y encima el degradé oscuro con tres manchas que
+         derivan. El degradé es el que sostiene la legibilidad del texto: sin
+         él, sobre el cielo claro de la foto el blanco se pierde. -->
+    {
+      foto && (
+        <img
+          src={foto}
+          alt=""
+          aria-hidden="true"
+          class="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        />
+      )
+    }
+
+    <div
+      aria-hidden="true"
+      class:list={['pointer-events-none absolute inset-0', foto ? 'aurora-foto' : 'aurora']}
+    >
       <span class="mancha mancha-a"></span>
       <span class="mancha mancha-b"></span>
       <span class="mancha mancha-c"></span>
@@ -60,6 +82,20 @@ const marcas = [
      recálculos de layout. */
   .aurora {
     background: linear-gradient(150deg, #3b4349 0%, #20262a 46%, #0e1113 100%);
+  }
+
+  /* Misma dirección y mismos colores, pero translúcido, para que la foto se
+     vea a través. Arranca más abierto arriba, donde está el cielo, y cierra
+     abajo, donde se apoyan las cards y el botón. */
+  .aurora-foto {
+    background:
+      linear-gradient(
+        150deg,
+        rgba(59, 67, 73, 0.7) 0%,
+        rgba(32, 38, 42, 0.8) 46%,
+        rgba(14, 17, 19, 0.92) 100%
+      ),
+      linear-gradient(to bottom, rgba(14, 17, 19, 0.25) 0%, rgba(14, 17, 19, 0.55) 100%);
   }
 
   .mancha {
