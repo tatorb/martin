@@ -45,8 +45,8 @@ export const CALENDAR_EMBED_URL =
  *
  * Si sobra blanco abajo, bajalos. Si vuelve a aparecer el scroll, subilos.
  */
-export const CALENDAR_HEIGHT = 1400;
-export const CALENDAR_HEIGHT_MOBILE = 1850;
+export const CALENDAR_HEIGHT = 1150;
+export const CALENDAR_HEIGHT_MOBILE = 1600;
 
 /** Foto del fundador. Ruta relativa a /public. El original sin comprimir queda
  * en src/assets, fuera del build. */
