@@ -1,5 +1,10 @@
 ---
-import { CALENDAR_EMBED_URL, CALENDAR_HEIGHT, CONTACT } from '../site.config';
+import {
+  CALENDAR_EMBED_URL,
+  CALENDAR_HEIGHT,
+  CALENDAR_HEIGHT_MOBILE,
+  CONTACT,
+} from '../site.config';
 import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 ---
 
@@ -21,8 +26,7 @@ import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
             <iframe
               src={CALENDAR_EMBED_URL}
               title="Calendario para agendar una reunión con Studio MRB"
-              class="w-full rounded-[10px] bg-paper"
-              style={`height:${CALENDAR_HEIGHT}px`}
+              class="calendario w-full rounded-[10px] bg-paper"
               loading="lazy"
             />
           ) : (
@@ -62,3 +66,17 @@ import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
     </div>
   </div>
 </section>
+
+<style define:vars={{ altoCalendario: `${CALENDAR_HEIGHT}px`, altoCalendarioMovil: `${CALENDAR_HEIGHT_MOBILE}px` }}>
+  /* El alto va por CSS y no por atributo, para poder darle uno distinto en
+     pantallas angostas, donde el contenido de Google se apila y crece. */
+  .calendario {
+    height: var(--altoCalendarioMovil);
+  }
+
+  @media (min-width: 768px) {
+    .calendario {
+      height: var(--altoCalendario);
+    }
+  }
+</style>

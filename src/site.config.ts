@@ -32,8 +32,21 @@ export const VSL_POSTER_URL = '';
 export const CALENDAR_EMBED_URL =
   'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3j8YnCOwIEJfKZSVPEpJ83figEEplUbkSf7Ku2rDUrbKyhFs3BBD-XUnyRkoHq-56cRQ8APCcs?gv=true';
 
-/** Alto del iframe del calendario en píxeles. Subilo si el widget queda cortado. */
-export const CALENDAR_HEIGHT = 980;
+/**
+ * Alto del iframe del calendario, en píxeles.
+ *
+ * El scroll que aparece dentro del calendario es del contenido de Google, y no
+ * se puede tocar desde acá: es otro dominio. Lo único que lo hace desaparecer
+ * es darle al iframe más alto que el que ocupa su contenido.
+ *
+ * Van dos valores porque el ancho cambia mucho el alto que hace falta. En un
+ * teléfono Google apila el mes y la lista de horarios uno debajo del otro, así
+ * que necesita bastante más.
+ *
+ * Si sobra blanco abajo, bajalos. Si vuelve a aparecer el scroll, subilos.
+ */
+export const CALENDAR_HEIGHT = 1400;
+export const CALENDAR_HEIGHT_MOBILE = 1850;
 
 /** Foto del fundador. Ruta relativa a /public. El original sin comprimir queda
  * en src/assets, fuera del build. */
