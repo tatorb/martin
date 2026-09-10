@@ -52,7 +52,7 @@ export const CONTACT = {
 export const SEO = {
   title: 'Apertura de Cuentas | Studio MRB',
   description:
-    'Reuniones con los decisores de las cuentas que te importan, todas las semanas, ' +
+    'Reuniones con los decisores de las empresas que te importan, todas las semanas, ' +
     'sin depender de referidos. Studio MRB opera el sistema completo por vos.',
   ogImage: '/og.png',
 } as const;
