@@ -15,9 +15,14 @@ interface Props {
   ctaHref?: string;
   /** Ídem el logo. */
   homeHref?: string;
+  /**
+   * Se puede apagar el botón. En la página de agenda no tiene sentido ofrecer
+   * "Agendar" cuando el calendario ya está ahí abajo.
+   */
+  cta?: boolean;
 }
 
-const { ctaHref = '#agenda', homeHref = '#contenido' } = Astro.props;
+const { ctaHref = '#agenda', homeHref = '#contenido', cta = true } = Astro.props;
 ---
 
 {/* Fijo, como en el sitio institucional, con el mismo margen lateral que los
@@ -43,7 +48,7 @@ const { ctaHref = '#agenda', homeHref = '#contenido' } = Astro.props;
         <Logo class="h-5" />
       </a>
 
-      <Cta label="Agendar" size="sm" icon={false} href={ctaHref} pixel="boton_header" />
+      {cta && <Cta label="Agendar" size="sm" icon={false} href={ctaHref} pixel="boton_header" />}
     </div>
   </div>
 </header>

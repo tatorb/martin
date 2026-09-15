@@ -1,0 +1,91 @@
+---
+/**
+ * Página para compartir la agenda: /discovery-meeting
+ *
+ * Existe para poder pasar un link corto y propio en vez de la URL larga que da
+ * Google Calendar. Sólo eso: el calendario y lo mínimo para que se entienda de
+ * qué reunión se trata. Nada que distraiga ni que invite a irse a otra parte.
+ */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import {
+  CALENDAR_EMBED_URL,
+  CALENDAR_HEIGHT,
+  CALENDAR_HEIGHT_MOBILE,
+  CONTACT,
+} from '../site.config';
+import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from '../components/HeaderShape.astro';
+---
+
+<Base
+  title="Agendar una reunión | Studio MRB"
+  description="Elegí un horario para una reunión de 30 minutos con Martín Rodriguez Brusco, de Studio MRB."
+>
+  {/* Sin botón de agendar: el calendario ya está acá abajo. */}
+  <Header homeHref="/" cta={false} />
+
+  <main style={`padding:${BLOCK_H + 48}px ${PAGE_INSET}px 0`}>
+    <div class="mx-auto max-w-6xl px-6">
+      <h1 class="max-w-3xl text-3xl font-normal leading-tight tracking-tight md:text-4xl">
+        Agendemos treinta minutos
+      </h1>
+
+      <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
+        Elegí el día y la hora que te queden mejor. La reunión es por Google Meet y el link te
+        llega en la invitación.
+      </p>
+
+      <div class="mt-12 pb-20 md:pb-28">
+        {
+          CALENDAR_EMBED_URL ? (
+            <iframe
+              src={CALENDAR_EMBED_URL}
+              title="Calendario para agendar una reunión con Studio MRB"
+              class="calendario w-full rounded-[10px] bg-paper"
+            />
+          ) : (
+            <div
+              class="flex min-h-80 flex-col items-center justify-center border border-dashed border-line bg-mist px-6 py-16 text-center"
+              style={`border-radius:${PAGE_RADIUS}px`}
+            >
+              <p class="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+                Falta cargar el calendario
+              </p>
+              <p class="mt-4 text-sm text-muted">
+                Escribile directo a{' '}
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  class="text-ink underline decoration-line underline-offset-4"
+                >
+                  {CONTACT.email}
+                </a>
+              </p>
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style
+  define:vars={{
+    altoCalendario: `${CALENDAR_HEIGHT}px`,
+    altoCalendarioMovil: `${CALENDAR_HEIGHT_MOBILE}px`,
+  }}
+>
+  /* Igual que en la home: en pantallas angostas Google apila el mes y la lista
+     de horarios, así que hace falta más alto para que no aparezca su scroll. */
+  .calendario {
+    height: var(--altoCalendarioMovil);
+  }
+
+  @media (min-width: 768px) {
+    .calendario {
+      height: var(--altoCalendario);
+    }
+  }
+</style>
