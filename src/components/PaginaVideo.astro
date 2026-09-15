@@ -1,0 +1,109 @@
+---
+/**
+ * Cuerpo de una página de video.
+ *
+ * Está separado porque hay más de una: la del VSL vigente y la del anterior.
+ * Cambia el video y los textos de la pestaña, todo lo demás es igual.
+ */
+import Base from '../layouts/Base.astro';
+import Header from './Header.astro';
+import Cta from './Cta.astro';
+import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
+import AgendaModal from './AgendaModal.astro';
+import { urlDeEmbed } from '../lib/video';
+import Reproductor from './Reproductor.astro';
+
+interface Props {
+  /** URL de embed del video, sin los parámetros. */
+  url: string;
+  /** Título de la pestaña y de las previsualizaciones al compartir. */
+  title: string;
+  description: string;
+  /** Encabezado visible de la página. */
+  encabezado?: string;
+  /** Nombre del botón de agendar para el píxel de Meta. */
+  pixel?: string;
+}
+
+const {
+  url,
+  title,
+  description,
+  encabezado = '¿Cómo funciona?',
+  pixel = 'boton_pagina_video',
+} = Astro.props;
+
+// Esta página existe para ver el video, así que carga directo en vez de
+// esperar un clic.
+const embed = urlDeEmbed(url);
+---
+
+<Base title={title} description={description}>
+  <Header ctaHref="/#agenda" homeHref="/" />
+
+  <main style={`padding:${BLOCK_H + 40}px ${PAGE_INSET}px 40px`}>
+    <div class="mx-auto w-full max-w-6xl">
+      <h1 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
+        {encabezado}
+      </h1>
+
+      {
+        url ? (
+          <>
+            {/* El ancho máximo se deriva del alto libre, así el video entra
+                entero junto con el botón sin obligar a scrollear. */}
+            <div
+              id="marco"
+              class="relative mx-auto mt-8 aspect-video w-full overflow-hidden bg-ink"
+              style={`border-radius:${PAGE_RADIUS}px;max-width:calc((100vh - 260px) * 16 / 9)`}
+              data-marco-video
+            >
+              <iframe
+                src={embed}
+                data-yt
+                title="Apertura de Cuentas, Studio MRB"
+                class="h-full w-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+                allowfullscreen
+              />
+
+              {/* El video arranca solo y en silencio, que es lo único que
+                  permiten los navegadores. Este botón enciende el audio. */}
+              <button
+                type="button"
+                data-sonido
+                hidden
+                class="absolute bottom-4 left-4 inline-flex items-center gap-2 rounded-md bg-paper/95 px-4 py-2.5 text-sm font-medium text-ink shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)] backdrop-blur-sm transition-colors hover:bg-paper"
+              >
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M11 5L6 9H3v6h3l5 4V5z" />
+                  <path d="M15.5 8.5a5 5 0 010 7M18.5 5.5a9 9 0 010 13" />
+                </svg>
+                Activar sonido
+              </button>
+            </div>
+
+            <div class="mt-8 flex justify-center">
+              <Cta label="Agendar" href="/#agenda" pixel={pixel} />
+            </div>
+          </>
+        ) : (
+          <div
+            class="mt-8 flex aspect-video w-full flex-col items-center justify-center border border-dashed border-line bg-mist px-6 text-center"
+            style={`border-radius:${PAGE_RADIUS}px`}
+          >
+            <p class="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
+              Espacio reservado para el VSL
+            </p>
+            <p class="mt-3 max-w-md text-sm leading-relaxed text-muted">
+              Pegá la URL de embed del video en <code class="text-ink">src/site.config.ts</code>.
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+
+  <AgendaModal />
+  <Reproductor />
+</Base>
