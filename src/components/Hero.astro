@@ -21,8 +21,14 @@ const marcas = [
       class="relative mx-auto max-w-6xl px-6 pb-24 md:pb-32"
       style={`padding-top:${BLOCK_H + 72}px`}
     >
+      {/* A quién le habla la página. Va en texto corrido y no como etiqueta en
+          mayúsculas, porque esas se sacaron de toda la página. */}
+      <p class="max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+        Para empresas en el rubro industrial con modelo B2B, ventas directas y consultivas.
+      </p>
+
       <h1
-        class="max-w-4xl text-4xl font-normal leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+        class="mt-6 max-w-4xl text-4xl font-normal leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
       >
         Reuniones con los decisores<br class="hidden sm:block" /> de las empresas que te importan
       </h1>
