@@ -1,35 +1,18 @@
 ---
-// Ajustes del reproductor de YouTube, para todos los iframes con data-yt.
+// Apaga los subtítulos automáticos de YouTube en todos los iframes con data-yt.
 //
-// 1. Apaga los subtítulos automáticos.
+// El parámetro cc_load_policy=0 solo cubre los subtítulos que el que mira tenga
+// activados por preferencia. Los automáticos, los que YouTube genera solo, se
+// cargan igual y no hay parámetro de URL que los evite. La única vía es la API
+// del reproductor, descargando el módulo de subtítulos.
 //
-//    El parámetro cc_load_policy=0 solo cubre los subtítulos que el que mira
-//    tenga activados por preferencia. Los automáticos, los que YouTube genera
-//    solo, se cargan igual y no hay parámetro de URL que los evite. La única
-//    vía es la API del reproductor, descargando el módulo de subtítulos.
-//
-//    Se llama dos veces, al estar listo el reproductor y de nuevo al empezar a
-//    reproducir, porque el módulo puede volver a cargarse cuando arranca el
-//    video.
-//
-// 2. Enciende el sonido lo antes posible.
-//
-//    El video arranca solo, y para eso tiene que arrancar en silencio: ningún
-//    navegador deja reproducir con sonido sin que la persona haya interactuado
-//    con la página. No hay parámetro ni truco que lo evite.
-//
-//    Lo que sí se puede es no hacerla buscar el botón: el audio se enciende al
-//    primer clic, toque o tecla en cualquier parte de la página, siempre que el
-//    video esté a la vista. El botón queda igual, para quien quiera encenderlo
-//    a propósito y para que se entienda por qué no hay sonido todavía. Vive en
-//    el marco del video, con el atributo data-sonido.
+// Se llama dos veces, al estar listo el reproductor y de nuevo al empezar a
+// reproducir, porque el módulo puede volver a cargarse cuando arranca el video.
 ---
 
 <script>
   type Reproductor = {
     unloadModule: (modulo: string) => void;
-    unMute: () => void;
-    playVideo: () => void;
     addEventListener: (evento: string, manejador: (e: { data: number }) => void) => void;
   };
 
@@ -44,74 +27,6 @@
     }
   }
 
-  /**
-   * Conecta el botón de sonido que acompaña a este iframe, si es que lo tiene.
-   * El botón se busca dentro del mismo marco, así cada video enciende el suyo.
-   */
-  function conectarSonido(iframe: HTMLIFrameElement, reproductor: Reproductor) {
-    const marco = iframe.closest('[data-marco-video]');
-    const boton = marco?.querySelector<HTMLButtonElement>('[data-sonido]');
-    if (!marco) return;
-
-    if (boton) boton.hidden = false;
-
-    let sonando = false;
-
-    function encender() {
-      if (sonando) return;
-      sonando = true;
-      try {
-        reproductor.unMute();
-        // Si el navegador llegó a frenar la reproducción, esto la retoma.
-        reproductor.playVideo();
-      } catch {
-        // sin API no hay nada que hacer, quedan los controles de YouTube
-      }
-      if (boton) boton.hidden = true;
-    }
-
-    boton?.addEventListener('click', encender);
-
-    // Se sabe si el video está a la vista, para no encender el sonido de un
-    // video que quedó lejos, arriba o abajo de donde está mirando la persona.
-    let aLaVista = true;
-    if ('IntersectionObserver' in window) {
-      aLaVista = false;
-      new IntersectionObserver(
-        (entradas) => {
-          aLaVista = entradas.some((e) => e.isIntersecting);
-        },
-        { threshold: 0.5 }
-      ).observe(marco);
-    }
-
-    /**
-     * El sonido se enciende solo en cuanto la persona toca cualquier parte de
-     * la página.
-     *
-     * Es lo más cerca que se puede estar de arrancar con sonido: el navegador
-     * exige un gesto previo, pero ese gesto no tiene por qué ser el botón. Un
-     * clic en cualquier lado alcanza, y así la mayoría escucha el video sin
-     * tener que buscar nada.
-     *
-     * Se ignoran los clics sobre enlaces y botones, porque quien va a agendar
-     * o a navegar no espera que en ese momento aparezca audio.
-     */
-    function alPrimerGesto(evento: Event) {
-      if (!aLaVista) return;
-
-      const destino = evento.target as Element | null;
-      const interactivo = destino?.closest?.('a, button, input, select, textarea, [role="button"]');
-      if (interactivo && interactivo !== boton) return;
-
-      encender();
-    }
-
-    for (const tipo of ['pointerdown', 'keydown', 'touchstart']) {
-      document.addEventListener(tipo, alPrimerGesto, { passive: true });
-    }
-  }
-
   function montar() {
     const YT = (window as any).YT;
     if (!YT?.Player) return;
@@ -119,10 +34,7 @@
     document.querySelectorAll<HTMLIFrameElement>('iframe[data-yt]').forEach((iframe) => {
       const reproductor: Reproductor = new YT.Player(iframe, {
         events: {
-          onReady: () => {
-            apagarSubtitulos(reproductor);
-            conectarSonido(iframe, reproductor);
-          },
+          onReady: () => apagarSubtitulos(reproductor),
           onStateChange: (evento: { data: number }) => {
             if (evento.data === YT.PlayerState.PLAYING) apagarSubtitulos(reproductor);
           },

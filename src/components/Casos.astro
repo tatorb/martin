@@ -4,8 +4,7 @@ import { VSL_VERTICALES } from '../site.config';
 import { urlDeEmbed } from '../lib/video';
 import Reproductor from './Reproductor.astro';
 
-// Sin autoplay: el VSL de arriba ya arranca solo y varios a la vez es demasiado.
-const verticales = VSL_VERTICALES.filter(Boolean).map((url) => urlDeEmbed(url, { autoplay: false }));
+const verticales = VSL_VERTICALES.filter(Boolean).map((url) => urlDeEmbed(url));
 ---
 
 <section id="casos" style={`padding:0 ${PAGE_INSET}px`}>
