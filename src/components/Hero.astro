@@ -25,27 +25,30 @@ const marcas = [
           lo da el texto, así que en pantallas angostas la pastilla envuelve las
           líneas en lugar de estirarse de lado a lado. */}
       <p
-        class="inline-flex items-center gap-3 rounded-full bg-rosa py-1.5 pl-1.5 pr-5 text-sm leading-relaxed text-rosa-texto md:text-base"
+        class="inline-flex items-center gap-2.5 rounded-full bg-rosa py-1.5 pl-1.5 pr-5 text-sm leading-relaxed text-rosa-texto md:text-base"
       >
         {/* El círculo no se achica ni se deforma cuando el texto envuelve en
             dos líneas, de ahí el shrink-0. */}
         <span
-          class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-ink text-paper"
+          class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-ink text-paper"
           aria-hidden="true"
         >
+          {/* El triángulo va corrido 0,8 hacia arriba respecto del centro
+              geométrico de la caja. Apoyado en su base pesa abajo, así que
+              centrado por su caja se ve hundido dentro del círculo. */}
           <svg
-            width="19"
-            height="19"
+            width="17"
+            height="17"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.8"
+            stroke-width="1.9"
             stroke-linecap="round"
             stroke-linejoin="round"
           >
-            <path d="M12 3.6 1.8 20.4h20.4L12 3.6Z" />
-            <path d="M12 9.6v4.8" />
-            <path d="M12 17.4h.01" />
+            <path d="M12 2.8 2.2 19.6h19.6L12 2.8Z" />
+            <path d="M12 9v4.4" />
+            <path d="M12 16.7h.01" />
           </svg>
         </span>
         Para empresas en el rubro industrial con modelo B2B, ventas directas y consultivas.
