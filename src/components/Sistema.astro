@@ -43,39 +43,6 @@ const resultados = [
   { icono: 'tendencia', texto: 'para sumar al pipeline' },
 ];
 
-// Lo que entra en el programa, según los roles y recursos de la propuesta.
-const beneficios = [
-  {
-    titulo: 'Ejecutivo de prospección',
-    texto:
-      'Gestiona los prospectos todos los días, incorpora contactos nuevos a las secuencias y sigue de cerca a los que muestran interés.',
-  },
-  {
-    titulo: 'Especialista en implementación',
-    texto:
-      'Garantiza que el ecosistema funcione, configuración de herramientas, integraciones con el CRM y mantenimiento operativo.',
-  },
-  {
-    titulo: 'Consultor dedicado',
-    texto:
-      'Aporta la mirada estratégica y ajusta mensajes, secuencias y enfoques de contacto en función de lo que muestran las métricas.',
-  },
-  {
-    titulo: 'Agente de IA dedicado',
-    texto:
-      'Analiza y prioriza las empresas y los contactos con más potencial, para llegar antes a las oportunidades que valen.',
-  },
-  {
-    titulo: 'Tablero de performance',
-    texto:
-      'Los resultados a la vista en HubSpot, para que puedas mirar el desempeño de la campaña día a día sin pedirnos nada.',
-  },
-  {
-    titulo: 'Reunión semanal de alineación',
-    texto:
-      'Una hora por semana para revisar las métricas clave, compartir aprendizajes y ajustar la estrategia sin esperar al cierre de mes.',
-  },
-];
 ---
 
 <section id="sistema" style={`padding:0 ${PAGE_INSET}px`}>
@@ -168,25 +135,6 @@ const beneficios = [
         ))
       }
     </ul>
-
-    <div class="mt-20">
-      <h3 class="text-2xl font-normal tracking-tight md:text-3xl">
-        Qué recibís todos los meses
-      </h3>
-
-      <div class="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {
-          beneficios.map((b) => (
-            <div class="rounded-[10px] border border-line bg-mist p-7">
-              <h4 class="text-sm font-semibold uppercase tracking-[0.14em] text-accent">
-                {b.titulo}
-              </h4>
-              <p class="mt-4 text-base leading-relaxed text-muted">{b.texto}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
 
     <div class="mt-14">
       <Cta label="Agendar la primera reunión" pixel="boton_sistema" />
