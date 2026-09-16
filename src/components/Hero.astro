@@ -21,16 +21,19 @@ const marcas = [
       class="relative mx-auto max-w-6xl px-6 pb-24 md:pb-32"
       style={`padding-top:${BLOCK_H + 72}px`}
     >
-      {/* A quién le habla la página. Va en texto corrido y no como etiqueta en
-          mayúsculas, porque esas se sacaron de toda la página. */}
-      <p class="max-w-2xl text-base leading-relaxed text-muted md:text-lg">
+      {/* A quién le habla la página, en la pastilla rosa de la marca. El ancho
+          lo da el texto, así que en pantallas angostas la pastilla envuelve las
+          líneas en lugar de estirarse de lado a lado. */}
+      <p
+        class="inline-block rounded-full bg-rosa px-5 py-2.5 text-sm leading-relaxed text-rosa-texto md:text-base"
+      >
         Para empresas en el rubro industrial con modelo B2B, ventas directas y consultivas.
       </p>
 
       <h1
-        class="mt-6 max-w-4xl text-4xl font-normal leading-[1.06] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+        class="mt-6 max-w-4xl text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl md:text-6xl"
       >
-        Reuniones con los decisores<br class="hidden sm:block" /> de las empresas que te importan
+        Reuniones con los decisores de tus empresas objetivo de manera continua
       </h1>
 
       <dl class="mt-12 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">

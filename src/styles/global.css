@@ -18,6 +18,12 @@
      mantenga contraste AA encima. */
   --color-shell: #e5e7e9;
 
+  /* Rosa de marca, el de los avisos de la app. Se usa en la pastilla de
+     segmento del hero. PENDIENTE: confirmar el valor exacto contra la app.
+     Cambiando estas dos líneas cambia en todos lados. */
+  --color-rosa: #fbe4ea;
+  --color-rosa-texto: #8c2740;
+
   --font-sans: 'Urbanist Variable', ui-sans-serif, system-ui, sans-serif;
 
   --spacing-section: 7rem;
