@@ -54,29 +54,35 @@ const resultados = [
       </h2>
     </div>
 
-    <ol class="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    {/* Cards altas, con la etiqueta de etapa arriba, el título grande y la
+        descripción en chico. La destacada va en degradé oscuro con sombra, que
+        es lo único que la diferencia del resto. */}
+    <ol class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {
         etapas.map((e) => (
           <li
             class:list={[
-              'rounded-[10px] border p-7',
-              e.destacada ? 'border-ink bg-ink text-paper' : 'border-line bg-mist',
+              'flex min-h-[320px] flex-col rounded-[14px] p-6',
+              e.destacada
+                ? 'destacada text-paper shadow-[0_18px_40px_-18px_rgba(0,0,0,0.55)]'
+                : 'border border-line bg-mist',
             ]}
           >
             <span
               class:list={[
-                'block text-3xl font-light leading-none',
-                e.destacada ? 'text-line' : 'text-muted',
+                'self-start rounded-full px-3 py-1 text-xs tracking-tight',
+                e.destacada ? 'bg-white/15 text-paper' : 'bg-paper text-muted',
               ]}
             >
-              {e.n}
+              Etapa {e.n}
             </span>
-            <p class="mt-6 text-lg uppercase leading-snug tracking-tight">
-              <span class="font-bold">{e.fuerte}</span>
-              <span class="block font-normal">{e.resto}</span>
-            </p>
+
+            <h3 class="mt-6 text-xl font-normal leading-snug tracking-tight md:text-2xl">
+              {e.fuerte} {e.resto}
+            </h3>
+
             <p
-              class:list={['mt-5 text-sm leading-relaxed', e.destacada ? 'text-line' : 'text-muted']}
+              class:list={['mt-4 text-sm leading-relaxed', e.destacada ? 'text-line' : 'text-muted']}
             >
               {e.texto}
             </p>
@@ -142,3 +148,10 @@ const resultados = [
   </div>
   </div>
 </section>
+
+<style>
+  /* Mismo degradé que tenía el hero, para no inventar otro oscuro. */
+  .destacada {
+    background: linear-gradient(160deg, #3b4349 0%, #20262a 48%, #0e1113 100%);
+  }
+</style>
