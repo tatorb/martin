@@ -16,12 +16,16 @@
  * también lo pone Reproductor.astro. playsinline=1 evita que en el iPhone el
  * video se apodere de toda la pantalla al arrancar.
  */
-export function urlDeEmbed(url: string): string {
+export function urlDeEmbed(url: string, opciones: { autoplay?: boolean } = {}): string {
   if (!url) return '';
 
   const esYouTube = url.includes('youtube.com') || url.includes('youtube-nocookie.com');
   if (!esYouTube) return url;
 
+  const { autoplay = true } = opciones;
+  const partes = ['cc_load_policy=0', 'enablejsapi=1', 'playsinline=1'];
+  if (autoplay) partes.push('autoplay=1', 'mute=1');
+
   const separador = url.includes('?') ? '&' : '?';
-  return `${url}${separador}cc_load_policy=0&enablejsapi=1&autoplay=1&mute=1&playsinline=1`;
+  return `${url}${separador}${partes.join('&')}`;
 }

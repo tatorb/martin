@@ -62,11 +62,13 @@ const marcas = [
       <dl class="mt-12 grid max-w-3xl grid-cols-3 gap-2 sm:gap-4">
         {
           marcas.map((m) => (
-            <div class="rounded-[10px] border border-line bg-paper p-3.5 sm:p-6">
+            <div
+              class="rounded-[10px] bg-ink p-3.5 text-paper shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)] sm:p-6"
+            >
               <dt class="text-base font-normal leading-tight tracking-tight sm:text-2xl">
                 {m.valor}
               </dt>
-              <dd class="mt-2 text-xs leading-snug text-muted sm:text-sm sm:leading-relaxed">
+              <dd class="mt-2 text-xs leading-snug text-line sm:text-sm sm:leading-relaxed">
                 {m.detalle}
               </dd>
             </div>
