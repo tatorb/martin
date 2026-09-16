@@ -32,13 +32,7 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
 <section style={`padding:0 ${PAGE_INSET}px`}>
   <div class="bg-paper" style={`border-radius:${PAGE_RADIUS}px`}>
   <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-    <div class="mx-auto max-w-3xl text-center">
-      <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
-        ¿Cómo funciona?
-      </h2>
-    </div>
-
-    <div class="mx-auto mt-12 max-w-4xl">
+    <div class="mx-auto max-w-4xl">
       {
         VSL_EMBED_URL ? (
           usaFachada ? (
@@ -111,6 +105,12 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
       }
     </div>
 
+    {/* El botón va pegado al video, que es el momento en que alguien decide
+        agendar. Antes estaba al final de la sección. */}
+    <div class="mt-10 flex justify-center">
+      <Cta label="Agendar una reunión" variant="verde" pixel="boton_video" />
+    </div>
+
     <div class="mt-14 grid gap-4 md:grid-cols-3">
       {
         apoyos.map((a) => (
@@ -120,10 +120,6 @@ const embed = urlDeEmbed(VSL_EMBED_URL);
           </div>
         ))
       }
-    </div>
-
-    <div class="mt-14 flex justify-center">
-      <Cta label="Agendar" pixel="boton_video" />
     </div>
   </div>
   </div>

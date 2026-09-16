@@ -2,7 +2,7 @@
 // Botón del sistema de Studio MRB, con las medidas del sitio institucional.
 interface Props {
   label?: string;
-  variant?: 'solid' | 'outline' | 'light';
+  variant?: 'solid' | 'outline' | 'light' | 'verde';
   size?: 'sm' | 'md';
   /** La flecha va en los botones del cuerpo. El del header no la lleva. */
   icon?: boolean;
@@ -40,6 +40,7 @@ const styles = {
   solid: `bg-ink text-paper hover:bg-accent ${halo}`,
   outline: `border border-ink text-ink hover:bg-ink hover:text-paper ${halo}`,
   light: `bg-paper text-ink hover:bg-line ${halo}`, // para fondos oscuros, como el hero
+  verde: `bg-verde text-paper hover:bg-verde-hover ${halo}`,
 };
 ---
 

@@ -24,6 +24,11 @@
   --color-rosa: #fbe4ea;
   --color-rosa-texto: #8c2740;
 
+  /* Verde de marca, para el botón que lleva a la agenda desde el video.
+     PENDIENTE: confirmar el valor exacto contra la app. */
+  --color-verde: #1a7f5a;
+  --color-verde-hover: #146247;
+
   --font-sans: 'Urbanist Variable', ui-sans-serif, system-ui, sans-serif;
 
   --spacing-section: 7rem;
