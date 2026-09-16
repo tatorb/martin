@@ -1,0 +1,50 @@
+---
+/**
+ * Animaciones de entrada al scrollear.
+ *
+ * Todo lo que lleve la clase "aparece" arranca corrido y transparente, y entra
+ * cuando asoma en pantalla.
+ *
+ * Dos cuidados que importan:
+ *
+ * 1. El estado oculto vive detrás de la clase "con-animaciones", que este mismo
+ *    componente pone en <html> con un script en línea. Si el JavaScript no
+ *    corre, la clase nunca se agrega y todo se ve normal. Nunca se esconde
+ *    contenido que después no se pueda mostrar.
+ *
+ * 2. El script en línea se ejecuta donde está puesto, así que este componente
+ *    va antes de las secciones que anima: así no hay un parpadeo del contenido
+ *    visible antes de ocultarse.
+ *
+ * Quien pidió menos movimiento en su sistema lo ve todo quieto, por el bloque
+ * de prefers-reduced-motion en global.css.
+ */
+---
+
+<script is:inline>
+  document.documentElement.classList.add('con-animaciones');
+</script>
+
+<script>
+  const elementos = document.querySelectorAll<HTMLElement>('.aparece');
+
+  if (!('IntersectionObserver' in window)) {
+    // Sin soporte, se muestran todos de una y listo.
+    elementos.forEach((el) => el.classList.add('visible'));
+  } else {
+    const observador = new IntersectionObserver(
+      (entradas) => {
+        for (const entrada of entradas) {
+          if (!entrada.isIntersecting) continue;
+          entrada.target.classList.add('visible');
+          // Una sola vez: no tiene sentido re-animar al volver a subir.
+          observador.unobserve(entrada.target);
+        }
+      },
+      // Dispara cuando asomó un poco, no cuando está entrando el primer píxel.
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    elementos.forEach((el) => observador.observe(el));
+  }
+</script>

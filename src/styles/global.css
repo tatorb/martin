@@ -86,3 +86,33 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Animaciones de entrada al scrollear, de "Empresas amigas" hacia abajo.
+
+   El estado oculto cuelga de .con-animaciones, que Apariciones.astro agrega a
+   <html> por JavaScript. Si el JavaScript no corre, la clase no se agrega y no
+   se esconde nada: no hay forma de que quede contenido invisible. */
+.aparece {
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.con-animaciones .aparece {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.con-animaciones .aparece.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Quien pidió menos movimiento ve todo quieto y visible desde el arranque. */
+@media (prefers-reduced-motion: reduce) {
+  .con-animaciones .aparece {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
