@@ -25,7 +25,7 @@ const marcas = [
           lo da el texto, así que en pantallas angostas la pastilla envuelve las
           líneas en lugar de estirarse de lado a lado. */}
       <p
-        class="inline-flex items-center gap-2.5 rounded-full bg-rosa py-1.5 pl-1.5 pr-5 text-sm leading-relaxed text-rosa-texto md:text-base"
+        class="inline-flex items-center gap-2.5 rounded-full bg-rosa py-1.5 pl-1.5 pr-5 text-sm leading-snug text-rosa-texto md:text-base"
       >
         {/* El círculo no se achica ni se deforma cuando el texto envuelve en
             dos líneas, de ahí el shrink-0. */}
@@ -60,12 +60,16 @@ const marcas = [
         Reuniones con los decisores de tus empresas objetivo de manera continua
       </h1>
 
-      <dl class="mt-12 grid max-w-3xl grid-cols-1 gap-4 sm:grid-cols-3">
+      <dl class="mt-12 grid max-w-3xl grid-cols-3 gap-2 sm:gap-4">
         {
           marcas.map((m) => (
-            <div class="rounded-[10px] border border-line bg-paper p-6">
-              <dt class="text-2xl font-normal tracking-tight">{m.valor}</dt>
-              <dd class="mt-2 text-sm leading-relaxed text-muted">{m.detalle}</dd>
+            <div class="rounded-[10px] border border-line bg-paper p-3.5 sm:p-6">
+              <dt class="text-base font-normal leading-tight tracking-tight sm:text-2xl">
+                {m.valor}
+              </dt>
+              <dd class="mt-2 text-xs leading-snug text-muted sm:text-sm sm:leading-relaxed">
+                {m.detalle}
+              </dd>
             </div>
           ))
         }
