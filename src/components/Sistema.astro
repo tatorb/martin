@@ -46,8 +46,8 @@ const resultados = [
 
 <section id="sistema" style={`padding:0 ${PAGE_INSET}px`}>
   <div class="bg-paper" style={`border-radius:${PAGE_RADIUS}px`}>
-  <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-    <div class="max-w-3xl">
+  <div class="mx-auto max-w-6xl px-6 py-20 text-center md:py-28">
+    <div class="mx-auto max-w-3xl">
       <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
         Sistema de trabajo
       </h2>
@@ -61,7 +61,7 @@ const resultados = [
         etapas.map((e) => (
           <li
             class:list={[
-              'flex min-h-[250px] flex-col rounded-[14px] p-4 sm:min-h-[320px] sm:p-6',
+              'flex min-h-[250px] flex-col items-center rounded-[14px] p-4 sm:min-h-[320px] sm:p-6',
               e.destacada
                 ? 'destacada text-paper shadow-[0_18px_40px_-18px_rgba(0,0,0,0.55)]'
                 : 'border border-line bg-mist',
@@ -69,7 +69,7 @@ const resultados = [
           >
             <span
               class:list={[
-                'self-start rounded-full px-3 py-1 text-xs tracking-tight',
+                'self-center rounded-full px-3 py-1 text-xs tracking-tight',
                 e.destacada ? 'bg-white/15 text-paper' : 'bg-paper text-muted',
               ]}
             >

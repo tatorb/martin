@@ -1,0 +1,44 @@
+---
+/**
+ * Resguardo del header con silueta SVG.
+ *
+ * La home dejó de usarlo, pero la geometría de la silueta llevó bastante
+ * trabajo, así que el componente sigue vivo y acá se puede ver funcionando sin
+ * tener que reconstruirlo desde cero. No está enlazada desde ningún lado y va
+ * con noindex.
+ *
+ * Si alguna vez vuelve a la home: importar Header en src/pages/index.astro y
+ * devolverle al hero el padding superior que despejaba su alto.
+ */
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from '../components/HeaderShape.astro';
+---
+
+<Base title="Header anterior | Studio MRB" description="Resguardo interno del header." noindex>
+  <Header homeHref="/" ctaHref="/#agenda" />
+
+  <main style={`padding:${BLOCK_H + 48}px ${PAGE_INSET}px 40px`}>
+    <div class="mx-auto max-w-3xl px-6">
+      <h1 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
+        Header anterior
+      </h1>
+      <p class="mt-6 leading-relaxed text-muted">
+        Esta página existe para no perder el header con la silueta SVG, que la home dejó de usar.
+        Arriba está funcionando, con su barra fija, sus arcos tangentes y los extremos en gancho.
+      </p>
+      <p class="mt-4 leading-relaxed text-muted">
+        Vive en <code class="text-ink">src/components/Header.astro</code> y su geometría en
+        <code class="text-ink">src/components/HeaderShape.astro</code>. Para devolverlo a la home hay
+        que importarlo en <code class="text-ink">src/pages/index.astro</code> y restituirle al hero el
+        padding superior que despejaba su alto.
+      </p>
+
+      {/* Sirve para ver la silueta sobre una sección clara al scrollear. */}
+      <div
+        class="mt-10 bg-mist"
+        style={`border-radius:${PAGE_RADIUS}px;height:120vh`}
+      />
+    </div>
+  </main>
+</Base>

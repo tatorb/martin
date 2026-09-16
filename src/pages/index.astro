@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import Header from '../components/Header.astro';
+import Logo from '../components/Logo.astro';
+import { PAGE_INSET } from '../components/HeaderShape.astro';
 import Hero from '../components/Hero.astro';
 import Vsl from '../components/Vsl.astro';
 import Casos from '../components/Casos.astro';
@@ -12,7 +13,12 @@ import AgendaModal from '../components/AgendaModal.astro';
 ---
 
 <Base>
-  <Header />
+  {/* El header con la silueta SVG salió de acá. Sigue vivo y se puede ver en
+      /header-anterior, para no perder el trabajo de su geometría. */}
+  <div class="flex justify-center py-8" style={`padding-left:${PAGE_INSET}px;padding-right:${PAGE_INSET}px`}>
+    <Logo class="h-6" />
+  </div>
+
   <main>
     <Hero />
     <Vsl />

@@ -9,8 +9,8 @@ const verticales = VSL_VERTICALES.filter(Boolean).map((url) => urlDeEmbed(url));
 
 <section id="casos" style={`padding:0 ${PAGE_INSET}px`}>
   <div class="bg-mist" style={`border-radius:${PAGE_RADIUS}px`}>
-  <div class="mx-auto max-w-6xl px-6 py-20 md:py-28">
-    <div class="max-w-3xl">
+  <div class="mx-auto max-w-6xl px-6 py-20 text-center md:py-28">
+    <div class="mx-auto max-w-3xl">
       <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
         Empresas amigas
       </h2>
@@ -21,7 +21,7 @@ const verticales = VSL_VERTICALES.filter(Boolean).map((url) => urlDeEmbed(url));
         // Uno al lado del otro en todos los tamaños, también en celular. El
         // ancho máximo del conjunto es lo que les pone techo al alto: son un
         // apoyo y no tienen que comerse la pantalla.
-        <div class="mt-12 grid max-w-[540px] grid-cols-2 gap-3 sm:gap-4">
+        <div class="mx-auto mt-12 grid max-w-[540px] grid-cols-2 gap-3 sm:gap-4">
           {verticales.map((src, i) => (
             <div class="overflow-hidden rounded-[10px] bg-ink">
               <iframe

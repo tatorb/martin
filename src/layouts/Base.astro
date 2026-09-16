@@ -6,9 +6,11 @@ import { SEO } from '../site.config';
 interface Props {
   title?: string;
   description?: string;
+  /** Para páginas internas que no queremos en buscadores. */
+  noindex?: boolean;
 }
 
-const { title = SEO.title, description = SEO.description } = Astro.props;
+const { title = SEO.title, description = SEO.description, noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://studiomrb.com');
 ---
 
@@ -37,6 +39,7 @@ src="https://www.facebook.com/tr?id=1942135256481970&ev=PageView&noscript=1"
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="icon" href="/favicon-192.png" sizes="192x192" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />

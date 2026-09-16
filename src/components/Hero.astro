@@ -1,25 +1,15 @@
 ---
-import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
-
-// Cifras estructurales del programa, tomadas de la propuesta de trabajo.
-const marcas = [
-  { valor: 'Día 10', detalle: 'el sistema ya está funcionando' },
-  { valor: '15 a 30 días', detalle: 'para las primeras reuniones' },
-  { valor: 'Garantía', detalle: '15 reuniones en 90 días' },
-];
+import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
 ---
 
-<!-- El contenedor va contra el borde superior de la página. El header se apoya
-     encima, por eso el contenido arranca despejando su alto. -->
+<!-- Ya no hay header fijo encima, así que el contenido no necesita despejar su
+     alto: arranca con su propio aire. -->
 <section id="contenido" style={`padding:0 ${PAGE_INSET}px`}>
   <div
     class="relative isolate overflow-hidden bg-mist text-ink"
     style={`border-radius:${PAGE_RADIUS}px`}
   >
-    <div
-      class="relative mx-auto max-w-6xl px-6 pb-14 md:pb-16"
-      style={`padding-top:${BLOCK_H + 72}px`}
-    >
+    <div class="relative mx-auto flex max-w-4xl flex-col items-center px-6 pb-16 pt-14 text-center md:pb-20 md:pt-16">
       {/* A quién le habla la página, en la pastilla rosa de la marca. El ancho
           lo da el texto, así que en pantallas angostas la pastilla envuelve las
           líneas en lugar de estirarse de lado a lado. */}
@@ -54,27 +44,11 @@ const marcas = [
       </p>
 
       <h1
-        class="mt-6 max-w-4xl text-[2.7rem] font-normal leading-[1.08] tracking-tight sm:text-5xl md:text-6xl"
+        class="mt-6 text-[2.7rem] font-normal leading-[1.08] tracking-tight sm:text-5xl md:text-6xl"
       >
         Reuniones con los decisores de tus empresas objetivo de manera continua
       </h1>
 
-      <dl class="mt-12 grid max-w-3xl grid-cols-3 gap-2 sm:gap-4">
-        {
-          marcas.map((m) => (
-            <div
-              class="rounded-[10px] bg-ink p-3.5 text-paper shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)] sm:p-6"
-            >
-              <dt class="text-base font-normal leading-tight tracking-tight sm:text-2xl">
-                {m.valor}
-              </dt>
-              <dd class="mt-2 text-xs leading-snug text-line sm:text-sm sm:leading-relaxed">
-                {m.detalle}
-              </dd>
-            </div>
-          ))
-        }
-      </dl>
     </div>
   </div>
 </section>
