@@ -57,12 +57,12 @@ const resultados = [
     {/* Cards altas, con la etiqueta de etapa arriba, el título grande y la
         descripción en chico. La destacada va en degradé oscuro con sombra, que
         es lo único que la diferencia del resto. */}
-    <ol class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ol class="mt-14 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
       {
         etapas.map((e) => (
           <li
             class:list={[
-              'flex min-h-[320px] flex-col rounded-[14px] p-6',
+              'flex min-h-[250px] flex-col rounded-[14px] p-4 sm:min-h-[320px] sm:p-6',
               e.destacada
                 ? 'destacada text-paper shadow-[0_18px_40px_-18px_rgba(0,0,0,0.55)]'
                 : 'border border-line bg-mist',
@@ -77,12 +77,15 @@ const resultados = [
               Etapa {e.n}
             </span>
 
-            <h3 class="mt-6 text-xl font-normal leading-snug tracking-tight md:text-2xl">
+            <h3 class="mt-5 text-base font-normal leading-snug tracking-tight sm:mt-6 sm:text-xl md:text-2xl">
               {e.fuerte} {e.resto}
             </h3>
 
             <p
-              class:list={['mt-4 text-sm leading-relaxed', e.destacada ? 'text-line' : 'text-muted']}
+              class:list={[
+                'mt-3 text-xs leading-relaxed sm:mt-4 sm:text-sm',
+                e.destacada ? 'text-line' : 'text-muted',
+              ]}
             >
               {e.texto}
             </p>
