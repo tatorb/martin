@@ -1,5 +1,6 @@
 ---
 import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
+import { CONTACT } from '../site.config';
 
 // Respuestas apoyadas en los plazos y el alcance de la propuesta de trabajo,
 // y en el modelo de estados del protocolo de trabajo de MRB.
@@ -44,30 +45,54 @@ const faqs = [
     este cambio el límite entre las dos no existe. */}
 <section id="faqs" style={`padding:0 ${PAGE_INSET}px`}>
   <div class="bg-mist" style={`border-radius:${PAGE_RADIUS}px`}>
-  <div class="mx-auto max-w-4xl px-6 py-20 md:py-28">
-    <h2 class="text-3xl font-normal leading-tight tracking-tight md:text-4xl">
-      Lo que suelen preguntarnos antes de empezar
-    </h2>
+    <div class="mx-auto max-w-3xl px-6 py-20 md:py-28">
+      <h2 class="text-center text-3xl font-normal leading-tight tracking-tight md:text-4xl">
+        Lo que suelen preguntarnos antes de empezar
+      </h2>
 
-    <div class="mt-12 border-t border-line">
-      {
-        faqs.map((f) => (
-          <details class="group border-b border-line">
-            <summary class="flex cursor-pointer items-start justify-between gap-6 py-6 text-left text-lg font-semibold leading-snug transition-colors hover:text-accent">
-              <span>{f.p}</span>
-              <span
-                aria-hidden="true"
-                class="relative mt-2 h-4 w-4 shrink-0 transition-transform duration-200 group-open:rotate-45"
-              >
-                <span class="absolute left-0 top-1/2 h-px w-4 -translate-y-1/2 bg-ink" />
-                <span class="absolute left-1/2 top-0 h-4 w-px -translate-x-1/2 bg-ink" />
-              </span>
-            </summary>
-            <p class="pb-7 pr-10 text-base leading-relaxed text-muted">{f.r}</p>
-          </details>
-        ))
-      }
+      {/* Cada pregunta es una pastilla. Cerrada va un tono más oscura que el
+          fondo; abierta pasa a blanca con sombra, que es lo que la despega del
+          resto. Sigue siendo details/summary, así que abre y cierra sin
+          JavaScript y el navegador se encarga del teclado. */}
+      <div class="mt-12 space-y-3">
+        {
+          faqs.map((f, i) => (
+            <details class="group overflow-hidden rounded-[26px] bg-shell transition-colors open:bg-paper open:shadow-[0_0_20px_-4px_rgba(0,0,0,0.18)]">
+              <summary class="flex cursor-pointer list-none items-center gap-4 px-5 py-4 text-left">
+                <span class="w-4 shrink-0 text-sm text-muted">{i + 1}</span>
+
+                <span class="flex-1 text-base font-medium leading-snug md:text-lg">{f.p}</span>
+
+                {/* Cerrado: círculo negro con un más. Abierto: círculo con
+                    borde y el mismo más girado, que da la cruz. */}
+                <span
+                  aria-hidden="true"
+                  class="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-ink text-paper transition-colors duration-200 group-open:border group-open:border-line group-open:bg-paper group-open:text-ink"
+                >
+                  <span class="relative block h-3.5 w-3.5 transition-transform duration-200 group-open:rotate-45">
+                    <span class="absolute left-0 top-1/2 h-px w-3.5 -translate-y-1/2 bg-current" />
+                    <span class="absolute left-1/2 top-0 h-3.5 w-px -translate-x-1/2 bg-current" />
+                  </span>
+                </span>
+              </summary>
+
+              <p class="pb-6 pl-[52px] pr-6 text-sm leading-relaxed text-muted sm:pr-16 md:text-base">
+                {f.r}
+              </p>
+            </details>
+          ))
+        }
+      </div>
+
+      <p class="mt-12 text-center text-sm text-muted">
+        ¿Tenés otra pregunta?{' '}
+        <a
+          href={`mailto:${CONTACT.email}`}
+          class="text-ink underline decoration-line underline-offset-4 transition-colors hover:decoration-ink"
+        >
+          Escribinos
+        </a>
+      </p>
     </div>
-  </div>
   </div>
 </section>
