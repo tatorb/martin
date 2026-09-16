@@ -16,10 +16,16 @@
 export const VSL_EMBED_URL = 'https://www.youtube-nocookie.com/embed/vRoc3HpUFJQ';
 
 /**
- * Video vertical que acompaña a la sección de cuentas. Arranca sólo al hacer
- * clic, para no tener dos videos reproduciéndose a la vez.
+ * Videos verticales de testimonios, arriba de las cuentas. Se muestran uno al
+ * lado del otro, así que agregar un tercero los hace más angostos: conviene no
+ * pasar de dos o tres.
+ *
+ * Arrancan sólo al hacer clic, para no tener varios reproduciéndose a la vez.
  */
-export const VSL_VERTICAL_EMBED_URL = 'https://www.youtube-nocookie.com/embed/TwfXKm7Gh60';
+export const VSL_VERTICALES = [
+  'https://www.youtube-nocookie.com/embed/TwfXKm7Gh60',
+  'https://www.youtube-nocookie.com/embed/bU0LLcRj31I',
+];
 
 /**
  * Versión anterior del video. Sigue publicada en /v/video, para no romper los

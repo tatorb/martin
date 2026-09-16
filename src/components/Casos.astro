@@ -1,11 +1,11 @@
 ---
 import { PAGE_INSET, PAGE_RADIUS } from './HeaderShape.astro';
-import { VSL_VERTICAL_EMBED_URL } from '../site.config';
+import { VSL_VERTICALES } from '../site.config';
 import { urlDeEmbed } from '../lib/video';
 import Reproductor from './Reproductor.astro';
 
-// Sin autoplay: el de arriba ya arranca solo y dos a la vez es demasiado.
-const vertical = urlDeEmbed(VSL_VERTICAL_EMBED_URL, { autoplay: false });
+// Sin autoplay: el VSL de arriba ya arranca solo y varios a la vez es demasiado.
+const verticales = VSL_VERTICALES.filter(Boolean).map((url) => urlDeEmbed(url, { autoplay: false }));
 // Portfolio real, tomado de la presentación institucional y de la propuesta de
 // trabajo. Solo la cuenta y el tipo de empresa que es.
 const casos = [
@@ -30,19 +30,24 @@ const casos = [
     </div>
 
     {
-      vertical && (
-        // Vertical y angosto a propósito: es un apoyo, no tiene que comerse la
-        // pantalla. El ancho fijo es lo que le pone el techo al alto.
-        <div class="mt-12 w-[240px] overflow-hidden rounded-[10px] bg-ink md:w-[260px]">
-          <iframe
-            src={vertical}
-            data-yt
-            title="Cuentas que prospectan con un sistema"
-            class="block aspect-[9/16] w-full"
-            loading="lazy"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
-            allowfullscreen
-          />
+      verticales.length > 0 && (
+        // Uno al lado del otro en todos los tamaños, también en celular. El
+        // ancho máximo del conjunto es lo que les pone techo al alto: son un
+        // apoyo y no tienen que comerse la pantalla.
+        <div class="mt-12 grid max-w-[540px] grid-cols-2 gap-3 sm:gap-4">
+          {verticales.map((src, i) => (
+            <div class="overflow-hidden rounded-[10px] bg-ink">
+              <iframe
+                src={src}
+                data-yt
+                title={`Testimonio ${i + 1}`}
+                class="block aspect-[9/16] w-full"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture"
+                allowfullscreen
+              />
+            </div>
+          ))}
         </div>
       )
     }
