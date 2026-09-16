@@ -19,15 +19,14 @@
   --color-shell: #e5e7e9;
 
   /* Rosa de marca, el de los avisos de la app. Se usa en la pastilla de
-     segmento del hero. PENDIENTE: confirmar el valor exacto contra la app.
-     Cambiando estas dos líneas cambia en todos lados. */
-  --color-rosa: #fbe4ea;
-  --color-rosa-texto: #8c2740;
+     segmento del hero. El texto encima va en negro, como el resto del hero. */
+  --color-rosa: #f4d7e1;
 
-  /* Verde de marca, para el botón que lleva a la agenda desde el video.
-     PENDIENTE: confirmar el valor exacto contra la app. */
-  --color-verde: #1a7f5a;
-  --color-verde-hover: #146247;
+  /* "Verde" de marca, para el botón que lleva a la agenda desde el video. Es el
+     mismo valor que --color-accent; se deja con su propio nombre porque así se
+     lo llama en la marca. El hover es el mismo tono un paso más oscuro. */
+  --color-verde: #5b7382;
+  --color-verde-hover: #4a5e6a;
 
   --font-sans: 'Urbanist Variable', ui-sans-serif, system-ui, sans-serif;
 
