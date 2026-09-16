@@ -66,10 +66,6 @@ export const CALENDAR_EMBED_URL =
 export const CALENDAR_HEIGHT = 1150;
 export const CALENDAR_HEIGHT_MOBILE = 1600;
 
-/** Foto del fundador. Ruta relativa a /public. El original sin comprimir queda
- * en src/assets, fuera del build. */
-export const FOUNDER_PHOTO_URL = '/martin.webp';
-
 export const CONTACT = {
   name: 'Martín Rodriguez Brusco',
   role: 'Executive Director',
