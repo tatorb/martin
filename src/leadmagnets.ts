@@ -39,14 +39,31 @@ export const LEAD_MAGNETS: LeadMagnet[] = [
     // funcionando: entra por la redirección declarada en astro.config.mjs.
     slug: 'packaging-market-report',
     titulo: 'Presencia digital del mercado comprador de envases en Latinoamérica',
+    bajada:
+      '4.834 plantas compradoras y 2.889 proveedores, contados uno por uno en Argentina, ' +
+      'México, Colombia, Chile y Perú.',
+    descripcion:
+      'Trabajamos con proveedores industriales que le venden a plantas de alimentos, bebidas, ' +
+      'farma y cuidado personal. En todas las conversaciones aparecía la misma pregunta y nadie ' +
+      'tenía el número: cuántas plantas compradoras hay, con cuántos competidores se las ' +
+      'reparten, y cuántas de ellas son alcanzables. Salimos a contarlas. Este informe es lo que ' +
+      'encontramos.',
+    puntos: [
+      'Cuántas plantas compradoras y cuántos proveedores hay en cada uno de los cinco países',
+      'Cuántas plantas le tocan a cada proveedor, y por qué México es la excepción',
+      'En qué porcentaje de las plantas se puede ubicar a compras, y por qué la máxima autoridad aparece en más plantas que el área que firma',
+      'Qué producen y de qué tamaño son las plantas relevadas',
+      'La metodología completa, con el universo, los filtros aplicados y los límites del relevamiento',
+    ],
     archivo: '/lm/packaging-market-report.pdf',
     nombreDescarga: 'studio-mrb-presencia-digital-mercado-envases-latam.pdf',
     etiquetaDescarga: 'Descargar el informe en PDF',
     seo: {
       titulo: 'Presencia digital del mercado comprador de envases en Latinoamérica | Studio MRB',
       descripcion:
-        'Relevamiento de la presencia digital del mercado comprador de envases en ' +
-        'Latinoamérica, por Studio MRB.',
+        'Relevamiento propio de Studio MRB: 4.834 plantas compradoras de envases y 2.889 ' +
+        'proveedores en Argentina, México, Colombia, Chile y Perú, y qué tan accesible es ' +
+        'quien decide la compra.',
     },
   },
   {
