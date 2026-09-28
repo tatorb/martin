@@ -51,13 +51,15 @@ const campos = [
             {magnet.titulo}
           </h1>
 
-          <p class="mt-5 text-lg text-line md:text-xl">{magnet.bajada}</p>
+          {magnet.bajada && <p class="mt-5 text-lg text-line md:text-xl">{magnet.bajada}</p>}
 
-          <p class="mt-8 max-w-2xl leading-relaxed text-line">{magnet.descripcion}</p>
+          {magnet.descripcion && (
+            <p class="mt-8 max-w-2xl leading-relaxed text-line">{magnet.descripcion}</p>
+          )}
 
           <ul class="mt-10 grid gap-3">
             {
-              magnet.puntos.map((punto) => (
+              (magnet.puntos ?? []).map((punto) => (
                 <li class="flex gap-3 rounded-[10px] border border-white/15 bg-white/5 p-5 text-sm leading-relaxed backdrop-blur-sm">
                   <svg
                     width="18"

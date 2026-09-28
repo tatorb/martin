@@ -11,12 +11,12 @@ export interface LeadMagnet {
   slug: string;
   /** Título de la página. */
   titulo: string;
-  /** Frase corta debajo del título. */
-  bajada: string;
-  /** Uno o dos párrafos que explican qué es y para quién. */
-  descripcion: string;
-  /** Qué se lleva quien lo descarga. Se muestra como lista. */
-  puntos: string[];
+  /** Frase corta debajo del título. Opcional. */
+  bajada?: string;
+  /** Uno o dos párrafos que explican qué es y para quién. Opcional. */
+  descripcion?: string;
+  /** Qué se lleva quien lo descarga. Se muestra como lista. Opcional. */
+  puntos?: string[];
   /** Ruta del PDF dentro de public. */
   archivo: string;
   /** Nombre con el que se guarda el archivo en la computadora del visitante. */
@@ -28,6 +28,27 @@ export interface LeadMagnet {
 }
 
 export const LEAD_MAGNETS: LeadMagnet[] = [
+  {
+    // Lead magnet de la campaña de outbound de envases. FALTA el PDF: hay que
+    // dejarlo en public/lm/packaging-market-report.pdf. Hasta entonces la
+    // descarga no tiene archivo y el build avisa.
+    //
+    // El slug va con guion y no con punto. Un punto en el último tramo de la
+    // URL hace que los servidores estáticos lo lean como la extensión de un
+    // archivo y no encuentren la página. La dirección con punto sigue
+    // funcionando: entra por la redirección declarada en astro.config.mjs.
+    slug: 'packaging-market-report',
+    titulo: 'Presencia digital del mercado comprador de envases en Latinoamérica',
+    archivo: '/lm/packaging-market-report.pdf',
+    nombreDescarga: 'studio-mrb-presencia-digital-mercado-envases-latam.pdf',
+    etiquetaDescarga: 'Descargar el informe en PDF',
+    seo: {
+      titulo: 'Presencia digital del mercado comprador de envases en Latinoamérica | Studio MRB',
+      descripcion:
+        'Relevamiento de la presencia digital del mercado comprador de envases en ' +
+        'Latinoamérica, por Studio MRB.',
+    },
+  },
   {
     slug: 'linkedin',
     titulo: 'Las 9 herramientas con las que abrimos cuentas clave B2B',
@@ -57,4 +78,18 @@ export const LEAD_MAGNETS: LeadMagnet[] = [
 
 export function buscarLeadMagnet(slug: string): LeadMagnet | undefined {
   return LEAD_MAGNETS.find((lm) => lm.slug === slug);
+}
+
+/**
+ * Aviso durante la compilación si algún material no tiene su archivo. Sin esto,
+ * un lead magnet publicado con el PDF faltante se descubre recién cuando un
+ * interesado toca el botón de descarga y no baja nada.
+ */
+if (typeof process !== 'undefined' && process.env?.npm_lifecycle_event === 'build') {
+  const fs = await import('node:fs');
+  for (const lm of LEAD_MAGNETS) {
+    if (!fs.existsSync(`public${lm.archivo}`)) {
+      console.warn(`[lead magnets] falta el archivo de "${lm.slug}": public${lm.archivo}`);
+    }
+  }
 }
