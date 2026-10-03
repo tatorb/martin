@@ -1,0 +1,92 @@
+---
+/**
+ * Versión sin formulario de un lead magnet: /lm-f/[slug]
+ *
+ * Mismo material y mismos textos que /lm/[slug], pero la descarga está
+ * disponible de entrada. Sirve para cuando el dato ya lo tenemos: el contacto
+ * de una campaña de outbound, alguien con quien ya hablamos, una respuesta a un
+ * mail. Pedirle los datos de nuevo a quien ya nos los dio solo agrega fricción.
+ *
+ * Va con noindex: no tiene que competir en buscadores con la página que sí
+ * captura el dato, ni aparecer como la alternativa gratis de la otra.
+ */
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import AgendaModal from '../../components/AgendaModal.astro';
+import LeadMagnetTexto from '../../components/LeadMagnetTexto.astro';
+import { BLOCK_H, PAGE_INSET, PAGE_RADIUS } from '../../components/HeaderShape.astro';
+import { LEAD_MAGNETS } from '../../leadmagnets';
+
+export function getStaticPaths() {
+  return LEAD_MAGNETS.map((magnet) => ({
+    params: { slug: magnet.slug },
+    props: { magnet },
+  }));
+}
+
+const { magnet } = Astro.props;
+---
+
+<Base title={magnet.seo.titulo} description={magnet.seo.descripcion} noindex>
+  <Header ctaHref="/#agenda" homeHref="/" />
+
+  <main style={`padding:0 ${PAGE_INSET}px`}>
+    <section
+      class="relative isolate overflow-hidden text-paper"
+      style={`border-radius:${PAGE_RADIUS}px`}
+    >
+      <div aria-hidden="true" class="aurora pointer-events-none absolute inset-0"></div>
+
+      <div
+        class="relative mx-auto grid max-w-6xl gap-12 px-6 pb-20 md:pb-28 lg:grid-cols-[1fr_420px] lg:gap-16"
+        style={`padding-top:${BLOCK_H + 64}px`}
+      >
+        <LeadMagnetTexto magnet={magnet} />
+
+        <div class="lg:pt-2">
+          <div class="bg-paper p-7 text-ink md:p-8" style={`border-radius:${PAGE_RADIUS}px`}>
+            <h2 class="text-xl font-normal tracking-tight">Descargalo ahora</h2>
+            <p class="mt-3 text-sm leading-relaxed text-muted">
+              Sin formularios. Tocá el botón y el PDF se baja.
+            </p>
+
+            <a
+              href={magnet.archivo}
+              download={magnet.nombreDescarga}
+              class="mt-7 inline-flex w-full items-center justify-center gap-2.5 rounded-md bg-ink px-8 py-3.5 text-base font-medium text-paper shadow-[0_0_13px_-2px_rgba(0,0,0,0.51)] transition-colors duration-200 hover:bg-accent"
+            >
+              {magnet.etiquetaDescarga}
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M4.5 19.5h15"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+
+            <a
+              href="/#agenda"
+              data-lead="boton_lead_magnet_directo"
+              class="mt-3 inline-flex w-full items-center justify-center gap-2.5 rounded-md border border-ink px-8 py-3.5 text-base font-medium text-ink transition-colors duration-200 hover:bg-ink hover:text-paper"
+            >
+              Agendar una reunión
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <AgendaModal />
+</Base>
+
+<style>
+  /* Mismo fondo que la versión con formulario. */
+  .aurora {
+    background: linear-gradient(150deg, #3b4349 0%, #20262a 46%, #0e1113 100%);
+  }
+</style>
