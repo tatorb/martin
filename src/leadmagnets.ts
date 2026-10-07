@@ -29,6 +29,32 @@ export interface LeadMagnet {
 
 export const LEAD_MAGNETS: LeadMagnet[] = [
   {
+    slug: 'estrategia',
+    titulo: 'La estrategia que usamos para llegar a los decisores de grandes empresas',
+    bajada: 'El recorrido completo, el mismo que hacemos con nuestros clientes del sector industrial.',
+    descripcion:
+      'Casi todas las empresas con las que trabajamos llegan con lo mismo: saben qué tipo de ' +
+      'empresa quieren como cliente, pero no saben quién decide adentro ni cómo llegarle. Esta ' +
+      'guía muestra el recorrido que seguimos, de mapear el mercado a sentarse con el decisor.',
+    puntos: [
+      'Por qué Sales Navigator no alcanza, y qué herramientas hacen falta de verdad',
+      'Cómo se filtra el mercado por vida digital hasta quedarse con el universo contactable',
+      'La secuencia completa por LinkedIn y mail, paso por paso y con sus tiempos',
+      'Las cinco cosas que hacen que un mensaje se conteste y no se descarte en el primer renglón',
+      'Por qué se vuelve sobre las mismas empresas en olas, y qué se cambia en cada una',
+      'El caso Ormiflex: más de 100 decisores sentados en dos años',
+    ],
+    archivo: '/lm/estrategia.pdf',
+    nombreDescarga: 'studio-mrb-estrategia-para-llegar-a-decisores.pdf',
+    etiquetaDescarga: 'Descargar la guía en PDF',
+    seo: {
+      titulo: 'La estrategia para llegar a los decisores de grandes empresas | Studio MRB',
+      descripcion:
+        'Cómo mapear el mercado, encontrar a los decisores y armar la secuencia de contacto ' +
+        'por LinkedIn y mail. La guía de Studio MRB, con el caso Ormiflex.',
+    },
+  },
+  {
     // Lead magnet de la campaña de outbound de envases. FALTA el PDF: hay que
     // dejarlo en public/lm/packaging-market-report.pdf. Hasta entonces la
     // descarga no tiene archivo y el build avisa.
